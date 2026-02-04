@@ -339,15 +339,21 @@ function renderChapters(dayData) {
 
     container.innerHTML = dayData.chapters.map((chapter, index) => {
         const isCompleted = dayProgress.chaptersCompleted.includes(chapter.id);
+        const isExpanded = index === 0; // 默认展开第一个章节
 
         return `
             <div class="bg-gh-card border border-gh-border rounded-lg overflow-hidden hover:border-gh-text-secondary transition-colors">
-                <div class="bg-gh-hover px-3 md:px-5 py-2.5 md:py-3.5 border-b border-gh-border">
+                <div class="bg-gh-hover px-3 md:px-5 py-2.5 md:py-3.5">
                     <div class="flex items-center justify-between gap-3">
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-sm md:text-base font-semibold text-gh-text">${getText(chapter.title)}</h3>
-                            <p class="text-[10px] md:text-xs text-gh-text-secondary mt-0.5 font-mono">${l.chapter} ${index + 1} • ${formatTime(chapter.timestamp)}</p>
-                        </div>
+                        <button onclick="toggleChapterExpand('chapter-${chapter.id}')" class="flex-1 min-w-0 text-left flex items-center gap-3 group">
+                            <svg class="chapter-chevron w-5 h-5 text-gh-text-secondary transition-transform ${isExpanded ? 'rotate-90' : ''}" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-sm md:text-base font-semibold text-gh-text group-hover:text-gh-blue transition-colors">${getText(chapter.title)}</h3>
+                                <p class="text-[10px] md:text-xs text-gh-text-secondary mt-0.5 font-mono">${l.chapter} ${index + 1}</p>
+                            </div>
+                        </button>
                         <button onclick="toggleChapterComplete('${chapter.id}')"
                             class="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full border-2 ${
                                 isCompleted
@@ -360,7 +366,8 @@ function renderChapters(dayData) {
                     </div>
                 </div>
 
-                <div class="p-4 md:p-6">
+                <div id="chapter-${chapter.id}" class="chapter-content ${isExpanded ? '' : 'hidden'}">
+                    <div class="p-4 md:p-6 border-t border-gh-border">
                     <div class="prose prose-invert prose-sm max-w-none text-gh-text text-sm md:text-base">
                         ${getText(chapter.content || chapter.description || '')}
                     </div>
@@ -408,6 +415,7 @@ function renderChapters(dayData) {
                             </ul>
                         </div>
                     ` : ''}
+                    </div>
                 </div>
             </div>
         `;
@@ -435,6 +443,20 @@ function renderChapters(dayData) {
             </div>
         </div>
     ` : '');
+}
+
+// 切换章节展开/折叠
+function toggleChapterExpand(chapterId) {
+    const chapterContent = document.getElementById(chapterId);
+    const chevron = chapterContent.previousElementSibling.querySelector('.chapter-chevron');
+
+    if (chapterContent.classList.contains('hidden')) {
+        chapterContent.classList.remove('hidden');
+        chevron.classList.add('rotate-90');
+    } else {
+        chapterContent.classList.add('hidden');
+        chevron.classList.remove('rotate-90');
+    }
 }
 
 // 切换章节完成状态
