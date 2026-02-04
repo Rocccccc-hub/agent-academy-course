@@ -17,11 +17,11 @@
                         'gh-card': '#161b22',
                         'gh-border': '#30363d',
                         'gh-hover': '#21262d',
-                        'gh-green': '#3fb950',  // 提高对比度
+                        'gh-green': '#3fb950',
                         'gh-green-bright': '#56d364',
-                        'gh-blue': '#58a6ff',  // 提高对比度
+                        'gh-blue': '#58a6ff',
                         'gh-text': '#e6edf3',
-                        'gh-text-secondary': '#8b949e',  // 提高对比度到 5.2:1
+                        'gh-text-secondary': '#b1bac4',  // 提高对比度到 7:1 以上
                     },
                     fontFamily: {
                         'mono': ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
@@ -52,12 +52,19 @@
         .prose th {
             color: #e6edf3 !important;
         }
-        /* 蓝色提示框 */
+        /* 蓝色提示框 - 增强对比度 */
         [class*="bg-blue-950"] p,
         [class*="bg-blue-950"] li,
+        [class*="bg-blue-950"] span,
         [class*="bg-indigo-950"] p,
-        [class*="bg-indigo-950"] li {
+        [class*="bg-indigo-950"] li,
+        [class*="bg-indigo-950"] span {
             color: #e6edf3 !important;
+        }
+        /* 提示框内的次级文本也需要足够亮 */
+        [class*="bg-blue-950"] .text-gh-text-secondary,
+        [class*="bg-indigo-950"] .text-gh-text-secondary {
+            color: #c9d1d9 !important;
         }
         /* 黄色警告框 - 高对比度 */
         [class*="bg-yellow-900"] p,
