@@ -1,0 +1,32 @@
+{
+  "name": "remotion-videos",
+  "version": "1.0.0",
+  "description": "Agent Course Videos - iOS Style Animations",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render Day1 out/day1.mp4",
+    "render-all": "npm run render-day1 && npm run render-day2 && npm run render-day3 && npm run render-day4 && npm run render-day5 && npm run render-day6 && npm run render-day7",
+    "render-day1": "remotion render Day1 out/day1.mp4",
+    "render-day2": "remotion render Day2 out/day2.mp4",
+    "render-day3": "remotion render Day3 out/day3.mp4",
+    "render-day4": "remotion render Day4 out/day4.mp4",
+    "render-day5": "remotion render Day5 out/day5.mp4",
+    "render-day6": "remotion render Day6 out/day6.mp4",
+    "render-day7": "remotion render Day7 out/day7.mp4"
+  },
+  "keywords": [
+    "remotion",
+    "agent",
+    "education",
+    "animation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.410",
+    "openai": "^6.17.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.410"
+  }
+}

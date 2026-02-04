@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试页面</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .section { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>课程系统调试</h1>
+
+    <div class="section">
+        <h2>1. 检查 course-data.js 是否加载</h2>
+        <div id="data-check"></div>
+    </div>
+
+    <div class="section">
+        <h2>2. 课程数据内容</h2>
+        <pre id="data-content"></pre>
+    </div>
+
+    <div class="section">
+        <h2>3. 视频路径测试</h2>
+        <video id="test-video" controls width="640"></video>
+        <div id="video-status"></div>
+    </div>
+
+    <script src="course-data.js"></script>
+    <script>
+        // 检查 courseData 是否存在
+        const dataCheck = document.getElementById('data-check');
+        if (typeof courseData !== 'undefined') {
+            dataCheck.innerHTML = '<span class="success">✓ courseData 已加载</span>';
+            dataCheck.innerHTML += '<br>数据项数量: ' + courseData.length;
+        } else {
+            dataCheck.innerHTML = '<span class="error">✗ courseData 未加载</span>';
+        }
+
+        // 显示第一天的数据
+        const dataContent = document.getElementById('data-content');
+        if (typeof courseData !== 'undefined' && courseData[0]) {
+            const day1 = courseData[0];
+            dataContent.textContent = JSON.stringify({
+                day: day1.day,
+                title: day1.title,
+                duration: day1.duration,
+                videoUrl: day1.videoUrl,
+                chaptersCount: day1.chapters.length,
+                firstChapter: {
+                    id: day1.chapters[0].id,
+                    title: day1.chapters[0].title,
+                    hasContent: !!day1.chapters[0].content,
+                    contentLength: day1.chapters[0].content ? day1.chapters[0].content.length : 0
+                }
+            }, null, 2);
+        }
+
+        // 测试视频加载
+        const video = document.getElementById('test-video');
+        const videoStatus = document.getElementById('video-status');
+
+        if (typeof courseData !== 'undefined' && courseData[0]) {
+            video.src = courseData[0].videoUrl;
+
+            video.addEventListener('loadedmetadata', () => {
+                videoStatus.innerHTML = '<span class="success">✓ 视频加载成功</span>';
+                videoStatus.innerHTML += '<br>时长: ' + video.duration.toFixed(2) + ' 秒';
+                videoStatus.innerHTML += '<br>尺寸: ' + video.videoWidth + 'x' + video.videoHeight;
+            });
+
+            video.addEventListener('error', (e) => {
+                videoStatus.innerHTML = '<span class="error">✗ 视频加载失败</span>';
+                videoStatus.innerHTML += '<br>路径: ' + courseData[0].videoUrl;
+                videoStatus.innerHTML += '<br>错误: ' + e.target.error?.message;
+            });
+        }
+    </script>
+</body>
+</html>

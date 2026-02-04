@@ -1,0 +1,202 @@
+    {
+        day: 2,
+        title: "Prompt 工程与优化",
+        subtitle: "掌握提示工程技巧",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "📝",
+        chapters: [
+            {
+                id: "prompt-basics",
+                title: "Prompt 工程基础",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">什么是 Prompt 工程？</h3>
+                    <p class="mb-4">Prompt 工程是设计和优化输入提示词的技术，用于引导 AI 模型生成期望的输出。对于 Agent 来说，优秀的 Prompt 设计直接影响决策质量。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">🎯 核心原则：</p>
+                        <ul class="space-y-2">
+                            <li><strong>清晰明确</strong> - 避免歧义，具体描述任务目标</li>
+                            <li><strong>提供上下文</strong> - 给出背景信息和约束条件</li>
+                            <li><strong>结构化输出</strong> - 指定期望的输出格式</li>
+                            <li><strong>示例引导</strong> - 使用 Few-shot Learning 提供示例</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "清晰的角色定义帮助 Agent 理解自己的职责范围",
+                    "明确的输出格式（如 JSON）让工具调用更可靠",
+                    "约束条件防止 Agent 做出不恰当的决策"
+                ]
+            }
+        ]
+    },
+    {
+        day: 3,
+        title: "MCP 协议深入",
+        subtitle: "理解模型上下文协议",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🔌",
+        chapters: [
+            {
+                id: "mcp-intro",
+                title: "MCP 协议简介",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">什么是 MCP？</h3>
+                    <p class="mb-4">Model Context Protocol（MCP）是一个开放协议，用于 AI 模型与外部系统之间的标准化通信。它让 Agent 能够安全、可控地访问各种数据源和工具。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">🔑 MCP 核心概念：</p>
+                        <ul class="space-y-2">
+                            <li><strong>Resources</strong> - 可访问的数据资源（文件、数据库、API等）</li>
+                            <li><strong>Tools</strong> - 可执行的操作（函数、命令等）</li>
+                            <li><strong>Prompts</strong> - 预定义的提示词模板</li>
+                            <li><strong>Context</strong> - 会话上下文和状态管理</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "MCP 提供了 Agent 与外部系统交互的标准接口",
+                    "通过 MCP 可以安全地扩展 Agent 的能力",
+                    "MCP 支持动态发现和组合多个数据源"
+                ]
+            }
+        ]
+    },
+    {
+        day: 4,
+        title: "记忆系统设计",
+        subtitle: "构建长期记忆能力",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "💾",
+        chapters: [
+            {
+                id: "memory-types",
+                title: "记忆类型与设计",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">Agent 的记忆系统</h3>
+                    <p class="mb-4">记忆系统让 Agent 能够记住历史信息，进行跨会话的任务。良好的记忆设计是构建实用 Agent 的关键。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">📝 记忆类型：</p>
+                        <ul class="space-y-2">
+                            <li><strong>短期记忆</strong> - 当前对话的上下文，存储在消息历史中</li>
+                            <li><strong>工作记忆</strong> - 任务执行过程中的中间状态和结果</li>
+                            <li><strong>长期记忆</strong> - 持久化的知识和经验，通常使用向量数据库</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "短期记忆使用对话历史，长期记忆需要向量检索",
+                    "记忆检索要精准，避免引入无关信息",
+                    "定期清理和更新记忆库，保持信息新鲜度"
+                ]
+            }
+        ]
+    },
+    {
+        day: 5,
+        title: "Agent 编排",
+        subtitle: "多Agent协作模式",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🎭",
+        chapters: [
+            {
+                id: "multi-agent",
+                title: "多 Agent 协作",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">多 Agent 系统</h3>
+                    <p class="mb-4">复杂任务往往需要多个专业 Agent 协作完成。多 Agent 系统通过分工合作，提高整体效率和准确性。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">🤝 协作模式：</p>
+                        <ul class="space-y-2">
+                            <li><strong>层级模式</strong> - Manager Agent 分配任务给 Worker Agents</li>
+                            <li><strong>流水线模式</strong> - Agent 按顺序处理，每个负责一个阶段</li>
+                            <li><strong>辩论模式</strong> - 多个 Agent 讨论，最终达成共识</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "每个 Agent 应该有明确的职责和专长",
+                    "Agent 间通信需要规范的消息格式",
+                    "需要协调机制避免 Agent 间冲突"
+                ]
+            }
+        ]
+    },
+    {
+        day: 6,
+        title: "实战项目",
+        subtitle: "完整Agent应用开发",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🛠️",
+        chapters: [
+            {
+                id: "project-planning",
+                title: "项目规划与实现",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">从零构建 Agent 应用</h3>
+                    <p class="mb-4">综合运用前面学到的知识，构建一个完整的 Agent 应用。项目实战是检验学习效果的最好方式。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">🎯 项目建议：</p>
+                        <ul class="space-y-2">
+                            <li><strong>个人助理</strong> - 日程管理、邮件处理、提醒</li>
+                            <li><strong>代码助手</strong> - 代码审查、文档生成、测试编写</li>
+                            <li><strong>数据分析师</strong> - 自动化数据处理和可视化</li>
+                            <li><strong>客服机器人</strong> - 多轮对话、知识检索、问题解决</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "从简单的 MVP 开始，逐步迭代完善",
+                    "重视错误处理和异常恢复",
+                    "收集用户反馈，持续优化体验"
+                ]
+            }
+        ]
+    },
+    {
+        day: 7,
+        title: "部署与优化",
+        subtitle: "生产环境最佳实践",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🚀",
+        chapters: [
+            {
+                id: "deployment",
+                title: "部署与监控",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">将 Agent 部署到生产环境</h3>
+                    <p class="mb-4">开发完成后，需要考虑如何稳定、安全地部署 Agent，并持续监控其运行状态。</p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">📊 关键指标：</p>
+                        <ul class="space-y-2">
+                            <li><strong>响应时间</strong> - Agent 完成任务的平均时长</li>
+                            <li><strong>成功率</strong> - 任务成功完成的比例</li>
+                            <li><strong>成本</strong> - API 调用费用和计算资源消耗</li>
+                            <li><strong>用户满意度</strong> - 用户反馈和评分</li>
+                        </ul>
+                    </div>
+                `,
+                corePoints: [
+                    "实现完善的日志和监控系统",
+                    "设置 API 调用频率限制和成本预警",
+                    "准备降级方案应对服务故障"
+                ]
+            }
+        ]
+    }

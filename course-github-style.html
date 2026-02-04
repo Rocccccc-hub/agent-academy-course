@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Academy - 7天实战课程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gh-bg': '#0d1117',
+                        'gh-card': '#161b22',
+                        'gh-border': '#30363d',
+                        'gh-hover': '#21262d',
+                        'gh-green': '#3fb950',  // WCAG AA 优化
+                        'gh-green-bright': '#56d364',
+                        'gh-blue': '#58a6ff',  // WCAG AA 优化
+                        'gh-text': '#e6edf3',
+                        'gh-text-secondary': '#8b949e',  // WCAG AA 优化 (5.2:1)
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
+                        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        code, pre {
+            font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+        }
+        .progress-ring {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-gh-bg text-gh-text min-h-screen">
+
+    <!-- 顶部导航栏 - GitHub 风格 -->
+    <nav class="bg-gh-card border-b border-gh-border sticky top-0 z-50">
+        <div class="max-w-[1280px] mx-auto px-8 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <svg class="w-8 h-8 text-gh-green" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <div>
+                        <h1 class="text-xl font-semibold text-gh-text">Agent Academy</h1>
+                        <p class="text-xs text-gh-text-secondary font-mono">7-day intensive course</p>
+                    </div>
+                </div>
+
+                <!-- 进度指示器 -->
+                <div class="flex items-center space-x-6">
+                    <div class="text-right">
+                        <p class="text-xs text-gh-text-secondary uppercase tracking-wide font-mono">Progress</p>
+                        <p class="text-sm font-bold text-gh-green font-mono" id="overall-progress-text">0%</p>
+                    </div>
+                    <div class="w-32 h-1.5 bg-gh-hover rounded-full overflow-hidden">
+                        <div id="overall-progress-bar" class="h-full bg-gh-green rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="text-xs text-gh-text-secondary font-mono" id="completed-count">0/7 days</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-[1280px] mx-auto px-8 py-8">
+        <div class="grid grid-cols-12 gap-6">
+
+            <!-- 左侧：课程导航 -->
+            <aside class="col-span-3">
+                <div class="sticky top-24">
+                    <h2 class="text-xs font-semibold text-gh-text-secondary uppercase tracking-wider mb-4 font-mono">Course Index</h2>
+                    <div id="course-nav" class="space-y-2">
+                        <!-- 动态生成导航项 -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 中间：主内容 -->
+            <main class="col-span-6">
+                <!-- 视频区域 -->
+                <div class="bg-gh-card border border-gh-border rounded-lg overflow-hidden mb-6">
+                    <div class="aspect-video bg-black relative" id="video-container">
+                        <video id="main-video" class="w-full h-full" controls>
+                            <source src="" type="video/mp4">
+                        </video>
+                        <div id="video-placeholder" class="absolute inset-0 flex items-center justify-center bg-gh-card">
+                            <div class="text-center">
+                                <div class="text-6xl mb-4">⚙️</div>
+                                <p class="text-lg font-semibold text-gh-text font-mono">Video rendering...</p>
+                                <p class="text-sm text-gh-text-secondary mt-2">Remotion animation in progress</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 视频信息 -->
+                    <div class="p-5 border-t border-gh-border">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h2 class="text-xl font-semibold text-gh-text" id="video-title">Day 1: Agent Architecture</h2>
+                                <p class="text-sm text-gh-text-secondary mt-1" id="video-subtitle">Understanding agent systems</p>
+                            </div>
+                            <span id="video-duration" class="px-3 py-1 bg-gh-hover border border-gh-border text-gh-text rounded text-xs font-mono">2:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 章节内容 -->
+                <div id="chapters-container" class="space-y-4">
+                    <!-- 动态生成章节卡片 -->
+                </div>
+            </main>
+
+            <!-- 右侧：补充资料 -->
+            <aside class="col-span-3">
+                <div class="sticky top-24 space-y-4">
+
+                    <!-- Tab 切换 -->
+                    <div class="bg-gh-card border border-gh-border rounded-lg p-1">
+                        <div class="flex space-x-1">
+                            <button onclick="switchTab('resources')" id="tab-resources" class="flex-1 py-2 px-3 rounded text-xs font-medium transition-all bg-gh-hover text-gh-text font-mono">
+                                Resources
+                            </button>
+                            <button onclick="switchTab('code')" id="tab-code" class="flex-1 py-2 px-3 rounded text-xs font-medium transition-all text-gh-text-secondary hover:text-gh-text font-mono">
+                                Code
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 资源内容 -->
+                    <div id="content-resources" class="space-y-4">
+                        <div class="bg-gh-card border border-gh-border rounded-lg p-5">
+                            <h3 class="font-semibold text-gh-text mb-3 text-sm flex items-center font-mono">
+                                <span class="mr-2">📚</span>
+                                Core Concepts
+                            </h3>
+                            <div id="core-concepts" class="space-y-2">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+
+                        <div class="bg-gh-card border border-gh-border rounded-lg p-5">
+                            <h3 class="font-semibold text-gh-text mb-3 text-sm flex items-center font-mono">
+                                <span class="mr-2">🔗</span>
+                                External Links
+                            </h3>
+                            <div id="external-links" class="space-y-2">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 代码内容 -->
+                    <div id="content-code" class="hidden space-y-4">
+                        <div class="bg-gh-card border border-gh-border rounded-lg overflow-hidden">
+                            <div class="flex items-center justify-between px-4 py-3 border-b border-gh-border">
+                                <h3 class="font-semibold text-gh-text text-xs font-mono">Code Example</h3>
+                                <button onclick="copyCode()" class="text-xs text-gh-text-secondary hover:text-gh-text transition-colors font-mono">Copy</button>
+                            </div>
+                            <pre id="code-display" class="p-4 text-xs text-gh-text overflow-x-auto bg-black font-mono"><code>// Code example will be displayed here</code></pre>
+                        </div>
+
+                        <div class="bg-gh-card border border-gh-border rounded-lg p-5">
+                            <h3 class="font-semibold text-gh-text mb-3 text-sm flex items-center font-mono">
+                                <span class="mr-2">💡</span>
+                                Best Practices
+                            </h3>
+                            <ul id="best-practices" class="space-y-2">
+                                <!-- 动态生成 -->
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="course-data.js"></script>
+    <script src="course-app-github.js"></script>
+</body>
+</html>

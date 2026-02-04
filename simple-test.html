@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>简单测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+    <h1 class="text-2xl font-bold mb-4">课程数据测试</h1>
+
+    <div id="output" class="space-y-4"></div>
+
+    <script src="course-data.js"></script>
+    <script>
+        const output = document.getElementById('output');
+
+        // 测试1: courseData是否存在
+        if (typeof courseData !== 'undefined') {
+            output.innerHTML += '<div class="bg-green-100 p-4 rounded">✓ courseData 已加载</div>';
+
+            // 测试2: 显示Day 1数据
+            const day1 = courseData[0];
+            output.innerHTML += `
+                <div class="bg-blue-100 p-4 rounded">
+                    <h2 class="font-bold">Day 1 数据:</h2>
+                    <p>标题: ${day1.title}</p>
+                    <p>时长: ${day1.duration}</p>
+                    <p>章节数: ${day1.chapters.length}</p>
+                    <p>视频URL: ${day1.videoUrl}</p>
+                </div>
+            `;
+
+            // 测试3: 渲染章节内容
+            day1.chapters.forEach((chapter, index) => {
+                output.innerHTML += `
+                    <div class="bg-white border border-gray-300 p-4 rounded">
+                        <h3 class="font-bold text-lg">${chapter.title}</h3>
+                        <div class="mt-2">${chapter.content}</div>
+                    </div>
+                `;
+            });
+        } else {
+            output.innerHTML = '<div class="bg-red-100 p-4 rounded">✗ courseData 未加载</div>';
+        }
+    </script>
+</body>
+</html>

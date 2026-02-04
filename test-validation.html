@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Course Data Validation</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #eee; }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .warning { color: #fbbf24; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #444; border-radius: 8px; }
+        pre { background: #2a2a2a; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Course Data Validation Report</h1>
+    <div id="report"></div>
+
+    <script src="course-data.js"></script>
+    <script>
+        const report = document.getElementById('report');
+        const results = [];
+
+        function addResult(type, title, message, details = '') {
+            results.push({ type, title, message, details });
+        }
+
+        // Test 1: Check if courseData is defined
+        try {
+            if (typeof courseData === 'undefined') {
+                addResult('error', 'Data Loading', 'courseData is undefined', 'course-data.js may not be loaded correctly');
+            } else if (!Array.isArray(courseData)) {
+                addResult('error', 'Data Type', 'courseData is not an array', `Type: ${typeof courseData}`);
+            } else {
+                addResult('success', 'Data Loading', `courseData loaded successfully (${courseData.length} days)`);
+            }
+        } catch (e) {
+            addResult('error', 'Data Loading', 'Exception while checking courseData', e.message);
+        }
+
+        // Test 2: Check Day 0-7 existence
+        if (Array.isArray(courseData)) {
+            for (let i = 0; i <= 7; i++) {
+                const day = courseData.find(d => d.day === i);
+                if (day) {
+                    addResult('success', `Day ${i}`, `Found: ${day.title}`, `Chapters: ${day.chapters?.length || 0}, Icon: ${day.icon}`);
+                } else {
+                    addResult('error', `Day ${i}`, 'Missing from courseData');
+                }
+            }
+        }
+
+        // Test 3: Check data structure completeness
+        if (Array.isArray(courseData)) {
+            courseData.forEach(day => {
+                const issues = [];
+                if (!day.day && day.day !== 0) issues.push('missing day number');
+                if (!day.title) issues.push('missing title');
+                if (!day.subtitle) issues.push('missing subtitle');
+                if (!day.duration) issues.push('missing duration');
+                if (!day.icon) issues.push('missing icon');
+                if (!day.chapters) issues.push('missing chapters array');
+                if (!day.externalLinks) issues.push('missing externalLinks array');
+
+                if (issues.length > 0) {
+                    addResult('warning', `Day ${day.day} Structure`, 'Incomplete data structure', issues.join(', '));
+                } else {
+                    addResult('success', `Day ${day.day} Structure`, 'Complete data structure');
+                }
+
+                // Check chapters
+                if (day.chapters) {
+                    day.chapters.forEach((chapter, idx) => {
+                        const chapterIssues = [];
+                        if (!chapter.id) chapterIssues.push('missing id');
+                        if (!chapter.title) chapterIssues.push('missing title');
+                        if (chapter.timestamp === undefined) chapterIssues.push('missing timestamp');
+                        if (!chapter.content) chapterIssues.push('missing content');
+
+                        if (chapterIssues.length > 0) {
+                            addResult('warning', `Day ${day.day} Chapter ${idx}`, 'Incomplete chapter', chapterIssues.join(', '));
+                        }
+                    });
+                }
+            });
+        }
+
+        // Test 4: Check for JavaScript syntax errors
+        try {
+            const testFunctions = [
+                () => courseData.map(d => d.day),
+                () => courseData.filter(d => d.videoUrl !== null),
+                () => courseData.find(d => d.day === 0)
+            ];
+            
+            testFunctions.forEach((fn, idx) => {
+                try {
+                    fn();
+                    addResult('success', `Syntax Test ${idx + 1}`, 'No errors in data manipulation');
+                } catch (e) {
+                    addResult('error', `Syntax Test ${idx + 1}`, 'Error during data manipulation', e.message);
+                }
+            });
+        } catch (e) {
+            addResult('error', 'Syntax Tests', 'Failed to run tests', e.message);
+        }
+
+        // Test 5: Check external links validity
+        if (Array.isArray(courseData)) {
+            courseData.forEach(day => {
+                if (day.externalLinks && day.externalLinks.length > 0) {
+                    day.externalLinks.forEach(link => {
+                        if (!link.title || !link.url || !link.description) {
+                            addResult('warning', `Day ${day.day} External Links`, 'Incomplete link data', `Title: ${link.title || 'missing'}`);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Render report
+        results.forEach(result => {
+            const section = document.createElement('div');
+            section.className = 'section';
+            section.innerHTML = `
+                <div class="${result.type}">
+                    <strong>${result.type.toUpperCase()}</strong>: ${result.title}
+                </div>
+                <div>${result.message}</div>
+                ${result.details ? `<pre>${result.details}</pre>` : ''}
+            `;
+            report.appendChild(section);
+        });
+
+        // Summary
+        const successCount = results.filter(r => r.type === 'success').length;
+        const errorCount = results.filter(r => r.type === 'error').length;
+        const warningCount = results.filter(r => r.type === 'warning').length;
+
+        const summary = document.createElement('div');
+        summary.className = 'section';
+        summary.style.borderColor = errorCount > 0 ? '#f87171' : '#4ade80';
+        summary.innerHTML = `
+            <h2>Summary</h2>
+            <div class="success">✓ Passed: ${successCount}</div>
+            <div class="warning">⚠ Warnings: ${warningCount}</div>
+            <div class="error">✗ Errors: ${errorCount}</div>
+        `;
+        report.insertBefore(summary, report.firstChild);
+    </script>
+</body>
+</html>

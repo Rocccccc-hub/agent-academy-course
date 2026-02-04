@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 MVP - Agent 架构基础</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen p-8">
+    <div class="max-w-5xl mx-auto">
+        <!-- 头部 -->
+        <div class="text-center mb-12">
+            <div class="text-8xl mb-6">🎬</div>
+            <h1 class="text-6xl font-bold text-white mb-4">
+                Day 1 MVP
+            </h1>
+            <p class="text-3xl text-white/90 font-semibold">
+                Agent 架构基础 - 完整教学视频
+            </p>
+        </div>
+
+        <!-- 主卡片 -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden mb-8">
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-white">
+                <h2 class="text-4xl font-bold mb-4">✅ 8-10分钟完整教学</h2>
+                <p class="text-xl opacity-90">
+                    6个场景，涵盖概念讲解、代码实战、实际案例
+                </p>
+            </div>
+
+            <div class="p-8">
+                <!-- 视频信息 -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-indigo-50 rounded-xl p-6">
+                        <div class="text-4xl mb-3">⏱️</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">时长</h3>
+                        <p class="text-gray-600">300 秒（5分钟）<br>9000 帧 @ 30fps</p>
+                    </div>
+
+                    <div class="bg-purple-50 rounded-xl p-6">
+                        <div class="text-4xl mb-3">🎨</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">分辨率</h3>
+                        <p class="text-gray-600">1920 x 1080<br>Full HD</p>
+                    </div>
+                </div>
+
+                <!-- 场景列表 -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">📋 场景内容</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">开场 + Agent 定义</h4>
+                                <p class="text-sm text-gray-600">动画标题、三大标签（30秒）</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">三大组件详解</h4>
+                                <p class="text-sm text-gray-600">LLM 大脑、工具库、记忆系统（2分钟）</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">ReAct 循环详解</h4>
+                                <p class="text-sm text-gray-600">流程图动画、四步详解（2分钟）</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl">4</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">代码实现</h4>
+                                <p class="text-sm text-gray-600">Agent 类代码逐行讲解（2分钟）</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl">5</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">实际案例演示</h4>
+                                <p class="text-sm text-gray-600">文件整理 Agent 完整流程（2分钟）</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="flex-shrink-0 w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-xl">6</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1">总结 + 下节预告</h4>
+                                <p class="text-sm text-gray-600">核心要点回顾（1分钟）</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="http://localhost:3003" target="_blank"
+                       class="block py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center font-bold text-xl rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all">
+                        🎬 在 Remotion Studio 中预览
+                    </a>
+
+                    <button onclick="copyRenderCommand()"
+                            class="py-6 bg-gray-800 text-white text-center font-bold text-xl rounded-xl hover:bg-gray-700 transition-colors">
+                        📹 复制渲染命令
+                    </button>
+                </div>
+
+                <!-- 渲染命令 -->
+                <div class="mt-6 bg-gray-900 rounded-xl p-6">
+                    <h4 class="text-white font-bold mb-3">渲染为 MP4 文件</h4>
+                    <pre id="render-command" class="text-sm text-green-400 font-mono overflow-x-auto">cd "/Users/anker/Desktop/CC project/agent/remotion-videos"
+npx remotion render Day1Complete out/day1-complete.mp4</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术细节 -->
+        <div class="bg-white/10 backdrop-blur rounded-3xl p-8 text-white">
+            <h3 class="text-3xl font-bold mb-6">💡 技术细节</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                    <div class="text-4xl mb-3">🎨</div>
+                    <h4 class="font-bold mb-2">视觉设计</h4>
+                    <p class="text-sm opacity-90">Spring 动画、渐入效果、逐行出现、时间轴展示</p>
+                </div>
+
+                <div>
+                    <div class="text-4xl mb-3">🌈</div>
+                    <h4 class="font-bold mb-2">配色方案</h4>
+                    <p class="text-sm opacity-90">Indigo-Purple 渐变主题，每个组件独特颜色</p>
+                </div>
+
+                <div>
+                    <div class="text-4xl mb-3">📝</div>
+                    <h4 class="font-bold mb-2">字体系统</h4>
+                    <p class="text-sm opacity-90">Apple System 标题，JetBrains Mono 代码</p>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-white/20">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm opacity-75">详细文档</p>
+                        <p class="font-semibold">DAY1-MVP.md</p>
+                    </div>
+                    <a href="DAY1-MVP.md" class="px-6 py-3 bg-white/20 backdrop-blur rounded-lg hover:bg-white/30 transition-colors">
+                        查看文档
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyRenderCommand() {
+            const command = document.getElementById('render-command').textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                alert('✅ 渲染命令已复制到剪贴板！\n\n在终端中粘贴运行即可渲染视频。');
+            });
+        }
+    </script>
+</body>
+</html>

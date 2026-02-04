@@ -1,0 +1,130 @@
+{
+  "video": "Day 1: Agent 架构基础",
+  "totalDuration": 480,
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "开场 + Agent 定义",
+      "startTime": 0,
+      "duration": 40,
+      "narration": "欢迎来到 Agent 开发系列课程。今天我们将深入理解 AI Agent 的架构基础。Agent 不是简单的聊天机器人，而是能够自主思考、使用工具、完成复杂任务的智能系统。在接下来的 8 分钟里，我们将从概念讲解、代码实战到实际案例，全面掌握 Agent 的工作原理。",
+      "subtitles": [
+        { "start": 0, "end": 4, "text": "欢迎来到 Agent 开发系列课程" },
+        { "start": 4, "end": 8, "text": "今天我们将深入理解 AI Agent 的架构基础" },
+        { "start": 8, "end": 14, "text": "Agent 不是简单的聊天机器人" },
+        { "start": 14, "end": 20, "text": "而是能够自主思考、使用工具、完成复杂任务的智能系统" },
+        { "start": 20, "end": 26, "text": "在接下来的 8 分钟里" },
+        { "start": 26, "end": 32, "text": "我们将从概念讲解、代码实战到实际案例" },
+        { "start": 32, "end": 40, "text": "全面掌握 Agent 的工作原理" }
+      ]
+    },
+    {
+      "scene": 2,
+      "title": "三大组件详解",
+      "startTime": 40,
+      "duration": 120,
+      "narration": "Agent 由三个核心组件构成。第一个是 LLM 大脑，它负责理解用户意图、制定执行计划、选择合适的工具，以及评估执行结果。可以把它想象成 Agent 的决策中枢。第二个是工具库，这是 Agent 与真实世界交互的接口。通过工具，Agent 可以读写文件、调用 API、查询数据库、甚至执行代码。工具让 Agent 突破了纯文本生成的限制，拥有了真正的执行能力。第三个是记忆系统，它维护着对话历史、任务状态、中间结果和上下文信息。记忆让 Agent 能够进行多轮对话，记住之前做过什么，以及接下来要做什么。这三个组件缺一不可，它们协同工作，让 Agent 能够自主完成复杂任务。",
+      "subtitles": [
+        { "start": 40, "end": 44, "text": "Agent 由三个核心组件构成" },
+        { "start": 44, "end": 50, "text": "第一个是 LLM 大脑" },
+        { "start": 50, "end": 56, "text": "负责理解意图、制定计划、选择工具、评估结果" },
+        { "start": 56, "end": 62, "text": "它是 Agent 的决策中枢" },
+        { "start": 62, "end": 68, "text": "第二个是工具库" },
+        { "start": 68, "end": 74, "text": "这是 Agent 与真实世界交互的接口" },
+        { "start": 74, "end": 82, "text": "通过工具，Agent 可以读写文件、调用 API" },
+        { "start": 82, "end": 88, "text": "查询数据库、甚至执行代码" },
+        { "start": 88, "end": 94, "text": "工具让 Agent 拥有了真正的执行能力" },
+        { "start": 94, "end": 100, "text": "第三个是记忆系统" },
+        { "start": 100, "end": 106, "text": "它维护对话历史、任务状态和上下文信息" },
+        { "start": 106, "end": 114, "text": "记忆让 Agent 能够进行多轮对话" },
+        { "start": 114, "end": 120, "text": "记住过去，规划未来" }
+      ]
+    },
+    {
+      "scene": 3,
+      "title": "ReAct 循环详解",
+      "startTime": 160,
+      "duration": 100,
+      "narration": "现在让我们看看 Agent 是如何工作的。最常用的模式叫做 ReAct，也就是 Reasoning 加 Acting。整个过程是一个循环：首先是 Thought，Agent 分析当前情况，思考下一步应该做什么。然后是 Action，根据思考结果，选择并执行一个工具。接着是 Observation，Agent 接收工具返回的结果，理解当前状态。最后，Agent 判断任务是否完成。如果还没完成，就回到 Thought 步骤，继续下一轮循环。这个循环会一直持续，直到 Agent 认为目标已经达成。ReAct 的强大之处在于，它让 Agent 能够动态调整策略。每执行一步，Agent 都会根据实际结果重新思考，而不是死板地按照预设流程执行。",
+      "subtitles": [
+        { "start": 160, "end": 165, "text": "Agent 如何工作？答案是 ReAct 模式" },
+        { "start": 165, "end": 170, "text": "Reasoning（推理）+ Acting（行动）" },
+        { "start": 170, "end": 176, "text": "第一步：Thought - 思考" },
+        { "start": 176, "end": 182, "text": "分析当前情况，规划下一步" },
+        { "start": 182, "end": 188, "text": "第二步：Action - 行动" },
+        { "start": 188, "end": 194, "text": "选择并执行合适的工具" },
+        { "start": 194, "end": 200, "text": "第三步：Observation - 观察" },
+        { "start": 200, "end": 206, "text": "接收工具返回的结果" },
+        { "start": 206, "end": 212, "text": "第四步：Loop - 循环" },
+        { "start": 212, "end": 218, "text": "判断是否完成，否则回到第一步" },
+        { "start": 218, "end": 226, "text": "ReAct 让 Agent 能够动态调整策略" },
+        { "start": 226, "end": 235, "text": "根据实际结果重新思考，而不是死板执行" }
+      ]
+    },
+    {
+      "scene": 4,
+      "title": "代码实现",
+      "startTime": 260,
+      "duration": 90,
+      "narration": "让我们看看如何用代码实现一个 Agent。首先定义 Agent 类，它的构造函数接收三个参数：LLM 模型、工具列表和记忆系统。核心方法是 run，它接收用户目标，然后进入循环。在循环中，首先调用 LLM 的 think 方法，传入目标、历史记录和可用工具，让 LLM 决定下一步做什么。如果 LLM 决定使用工具，就从工具列表中找到对应的工具，执行它，并将结果保存到记忆中。这里要注意，每次工具执行后，都要把思考过程、执行动作和观察结果都记录下来，这样 LLM 才能基于完整的上下文做出正确的决策。最后，调用 isGoalAchieved 方法判断目标是否达成。如果达成就退出循环，返回完整的执行历史。这个简单的实现就展示了 Agent 的核心工作机制。",
+      "subtitles": [
+        { "start": 260, "end": 265, "text": "如何用代码实现 Agent？" },
+        { "start": 265, "end": 271, "text": "首先定义 Agent 类" },
+        { "start": 271, "end": 277, "text": "构造函数：LLM、Tools、Memory" },
+        { "start": 277, "end": 283, "text": "核心方法：run(userGoal)" },
+        { "start": 283, "end": 289, "text": "进入 while 循环" },
+        { "start": 289, "end": 295, "text": "调用 llm.think() 思考下一步" },
+        { "start": 295, "end": 301, "text": "选择工具并执行" },
+        { "start": 301, "end": 307, "text": "记录到 memory 中" },
+        { "start": 307, "end": 313, "text": "判断目标是否完成" },
+        { "start": 313, "end": 320, "text": "未完成则继续循环" },
+        { "start": 320, "end": 328, "text": "完成后返回执行历史" },
+        { "start": 328, "end": 335, "text": "这就是 Agent 的核心机制" }
+      ]
+    },
+    {
+      "scene": 5,
+      "title": "实际案例演示",
+      "startTime": 350,
+      "duration": 90,
+      "narration": "让我们通过一个实际案例，看看 Agent 如何工作。用户的需求是：整理我的下载文件夹。Agent 首先思考：需要先看看文件夹里有什么。于是执行 list files 工具，观察到找到了 50 个文件，包括 15 个 PDF、20 张图片、10 个视频等等。接下来 Agent 思考：应该按文件类型创建分类文件夹。于是执行 create folders 工具，创建了文档、图片、视频三个文件夹。然后 Agent 思考：现在可以移动文件了。执行 move files by type 工具，将所有文件按类型移动到对应文件夹。最后 Agent 确认任务完成，生成报告：已整理 50 个文件到 3 个分类文件夹。整个过程经历了 3 轮 ReAct 循环，从理解需求到最终完成，Agent 都是自主决策的。这就是 Agent 的强大之处：你只需要告诉它目标，它会自己规划和执行。",
+      "subtitles": [
+        { "start": 350, "end": 355, "text": "实际案例：文件整理 Agent" },
+        { "start": 355, "end": 360, "text": "用户需求：整理下载文件夹" },
+        { "start": 360, "end": 366, "text": "第一轮 - Thought：先看看有什么文件" },
+        { "start": 366, "end": 372, "text": "Action：list_files()" },
+        { "start": 372, "end": 378, "text": "Observation：50个文件，多种类型" },
+        { "start": 378, "end": 384, "text": "第二轮 - Thought：按类型创建文件夹" },
+        { "start": 384, "end": 390, "text": "Action：create_folders()" },
+        { "start": 390, "end": 396, "text": "Observation：3个文件夹创建成功" },
+        { "start": 396, "end": 402, "text": "第三轮 - Thought：移动文件" },
+        { "start": 402, "end": 408, "text": "Action：move_files_by_type()" },
+        { "start": 408, "end": 414, "text": "Observation：所有文件已移动" },
+        { "start": 414, "end": 422, "text": "任务完成！3轮循环自主完成整理" },
+        { "start": 422, "end": 430, "text": "你只需告诉目标，Agent 会自己规划执行" }
+      ]
+    },
+    {
+      "scene": 6,
+      "title": "总结 + 下节预告",
+      "startTime": 440,
+      "duration": 40,
+      "narration": "让我们回顾一下今天学到的核心要点。第一，Agent 由三个组件组成：LLM 大脑、工具库和记忆系统，它们协同工作让 Agent 能够自主完成任务。第二，ReAct 循环是 Agent 的工作模式：思考、行动、观察，不断循环直到完成目标。第三，Agent 是可以编程实现的，核心就是一个 while 循环加上 LLM 调用。第四，Agent 能够解决真实问题，从简单的文件整理到复杂的业务流程自动化。掌握了这些基础，你就理解了 Agent 的本质。下一节课，我们将学习如何设计和优化 Agent 的行为，也就是提示工程与 Agent 控制。我们下节课见！",
+      "subtitles": [
+        { "start": 440, "end": 444, "text": "核心要点回顾" },
+        { "start": 444, "end": 450, "text": "1. 三大组件：LLM + Tools + Memory" },
+        { "start": 450, "end": 456, "text": "2. ReAct 循环：思考→行动→观察" },
+        { "start": 456, "end": 462, "text": "3. 可编程实现：while + LLM" },
+        { "start": 462, "end": 468, "text": "4. 解决真实问题的能力" },
+        { "start": 468, "end": 474, "text": "掌握这些，你就理解了 Agent 本质" },
+        { "start": 474, "end": 480, "text": "下节课：提示工程与 Agent 控制" }
+      ]
+    }
+  ],
+  "ttsInstructions": {
+    "voice": "alloy",
+    "model": "tts-1-hd",
+    "speed": 1.0,
+    "notes": "使用 OpenAI TTS API 生成音频。选择 alloy 声音（自然、中性）。语速适中，适合教学。"
+  }
+}

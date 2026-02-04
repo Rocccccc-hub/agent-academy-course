@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>视频测试</title>
+</head>
+<body>
+    <h1>视频加载测试</h1>
+
+    <h2>方法1: 直接路径</h2>
+    <video controls width="640">
+        <source src="../lessons/DAY1-agent 架构.mp4" type="video/mp4">
+    </video>
+
+    <h2>方法2: URL 编码</h2>
+    <video controls width="640">
+        <source src="../lessons/DAY1-agent%20%E6%9E%B6%E6%9E%84.mp4" type="video/mp4">
+    </video>
+
+    <h2>方法3: 绝对路径</h2>
+    <video controls width="640">
+        <source src="file:///Users/anker/Desktop/CC%20project/lessons/DAY1-agent%20%E6%9E%B6%E6%9E%84.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        // 检测视频加载状态
+        document.querySelectorAll('video').forEach((video, index) => {
+            video.addEventListener('loadedmetadata', () => {
+                console.log(`视频 ${index + 1} 加载成功！时长: ${video.duration}秒`);
+            });
+            video.addEventListener('error', (e) => {
+                console.error(`视频 ${index + 1} 加载失败:`, e);
+            });
+        });
+    </script>
+</body>
+</html>

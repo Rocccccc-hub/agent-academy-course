@@ -1,0 +1,471 @@
+// 课程数据 - 整合了外部资源的核心内容
+const courseData = [
+    {
+        day: 1,
+        title: "Agent 架构基础",
+        subtitle: "理解 Agent 的工作原理和架构模式",
+        duration: "2:00",
+        videoUrl: "../lessons/DAY1-agent-architecture.mp4",
+        icon: "🤖",
+        chapters: [
+            {
+                id: "what-is-agent",
+                title: "什么是 Agent？",
+                timestamp: 0,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">Agent（智能代理）的定义</h3>
+                    <p class="mb-4">Agent 是一个能够<strong>自主决策</strong>、<strong>使用工具</strong>、<strong>完成复杂任务</strong>的 AI 系统。它不同于传统的聊天机器人或 API 调用。</p>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">🔑 核心特征：</p>
+                        <ul class="space-y-2">
+                            <li><strong>自主性</strong> - 根据环境变化自主调整策略，不需要每一步都由人类指导</li>
+                            <li><strong>目标导向</strong> - 围绕用户目标进行多步推理和规划，而非简单的输入输出</li>
+                            <li><strong>工具使用</strong> - 能够调用外部工具和 API 扩展能力（如搜索、计算、文件操作）</li>
+                            <li><strong>记忆系统</strong> - 维护对话历史和任务状态，可以跨多轮对话工作</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="font-bold mb-2">Agent vs 传统程序</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 px-4 py-2 text-left">维度</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">传统程序</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Agent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2 font-medium">决策方式</td>
+                                    <td class="border border-gray-300 px-4 py-2">if-else 逻辑</td>
+                                    <td class="border border-gray-300 px-4 py-2">LLM 推理决策</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 px-4 py-2 font-medium">流程控制</td>
+                                    <td class="border border-gray-300 px-4 py-2">固定流程</td>
+                                    <td class="border border-gray-300 px-4 py-2">动态规划</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2 font-medium">功能范围</td>
+                                    <td class="border border-gray-300 px-4 py-2">单一功能</td>
+                                    <td class="border border-gray-300 px-4 py-2">工具组合</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 px-4 py-2 font-medium">适应性</td>
+                                    <td class="border border-gray-300 px-4 py-2">需要修改代码</td>
+                                    <td class="border border-gray-300 px-4 py-2">自动适应新场景</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                corePoints: [
+                    "Agent 能自主决策，不需要预定义所有路径",
+                    "通过工具扩展能力，突破 LLM 的限制",
+                    "适合处理复杂、多步骤的任务"
+                ],
+                codeExample: `// Agent 伪代码示例
+class Agent {
+    constructor(llm, tools) {
+        this.llm = llm;          // 大语言模型（大脑）
+        this.tools = tools;      // 可用工具列表
+        this.memory = [];        // 对话历史
+    }
+
+    async run(userGoal) {
+        while (!taskCompleted) {
+            // 1. 思考下一步
+            const thought = await this.llm.think(userGoal, this.memory);
+
+            // 2. 选择工具
+            const action = this.selectTool(thought);
+
+            // 3. 执行工具
+            const result = await this.tools[action.name](action.params);
+
+            // 4. 记录结果
+            this.memory.push({ thought, action, result });
+
+            // 5. 判断是否完成
+            taskCompleted = this.llm.isGoalAchieved(userGoal, this.memory);
+        }
+        return this.memory;
+    }
+}`,
+                bestPractices: [
+                    "从简单的单工具 Agent 开始学习",
+                    "理解 Agent 的局限性：不是所有任务都适合用 Agent",
+                    "给 Agent 明确的目标和约束条件"
+                ]
+            },
+            {
+                id: "react-pattern",
+                title: "ReAct 工作模式",
+                timestamp: 90,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">ReAct: Reasoning + Acting</h3>
+                    <p class="mb-4">ReAct 是目前最常用的 Agent 工作模式，由 Google 和普林斯顿大学在 2022 年提出。它将<strong>推理（Reasoning）</strong>和<strong>行动（Acting）</strong>紧密结合。</p>
+
+                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-5 mb-4">
+                        <h4 class="font-bold mb-3">🔄 ReAct 循环的四个步骤：</h4>
+                        <ol class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold mr-3">1</span>
+                                <div>
+                                    <strong>Thought（思考）</strong><br>
+                                    <span class="text-sm text-gray-600">分析当前情况，规划下一步行动。例如："我需要查找用户的订单信息"</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-3">2</span>
+                                <div>
+                                    <strong>Action（行动）</strong><br>
+                                    <span class="text-sm text-gray-600">选择并执行一个工具。例如：调用 <code class="bg-white px-1 rounded">search_orders(user_id=123)</code></span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold mr-3">3</span>
+                                <div>
+                                    <strong>Observation（观察）</strong><br>
+                                    <span class="text-sm text-gray-600">接收工具返回的结果。例如："找到 3 个订单，最新订单号为 #4567"</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold mr-3">4</span>
+                                <div>
+                                    <strong>Loop（循环）</strong><br>
+                                    <span class="text-sm text-gray-600">根据观察结果，回到步骤 1 继续思考，直到完成目标</span>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h4 class="font-bold mb-2">实际案例：文件整理 Agent</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg text-sm space-y-2">
+                        <p><strong>用户目标：</strong>"整理我的下载文件夹"</p>
+                        <hr class="my-2">
+                        <p><strong>Thought 1:</strong> 我需要先看看下载文件夹里有什么文件</p>
+                        <p><strong>Action 1:</strong> list_files("/Users/anker/Downloads")</p>
+                        <p><strong>Observation 1:</strong> 找到 50 个文件，包括 PDF、图片、视频等</p>
+                        <hr class="my-2">
+                        <p><strong>Thought 2:</strong> 我应该按文件类型分类创建文件夹</p>
+                        <p><strong>Action 2:</strong> create_folders(["文档", "图片", "视频"])</p>
+                        <p><strong>Observation 2:</strong> 文件夹创建成功</p>
+                        <hr class="my-2">
+                        <p><strong>Thought 3:</strong> 现在把文件移动到对应文件夹</p>
+                        <p><strong>Action 3:</strong> move_files_by_type()</p>
+                        <p><strong>Observation 3:</strong> 已移动 50 个文件</p>
+                        <hr class="my-2">
+                        <p><strong>Thought 4:</strong> 任务完成，生成报告</p>
+                        <p><strong>Action 4:</strong> generate_report()</p>
+                        <p class="text-green-600 font-semibold">✅ 完成！</p>
+                    </div>
+                `,
+                corePoints: [
+                    "Thought 是 Agent 的'思考过程'，让决策透明可理解",
+                    "Action 必须是预定义的工具，不能是任意操作",
+                    "Observation 的质量直接影响下一步决策"
+                ],
+                codeExample: `// ReAct 模式的 Python 实现示例
+from anthropic import Anthropic
+
+client = Anthropic(api_key="your-api-key")
+
+def react_loop(user_goal, tools, max_iterations=10):
+    conversation = [
+        {"role": "user", "content": user_goal}
+    ]
+
+    for i in range(max_iterations):
+        # Agent 思考并选择工具
+        response = client.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=1024,
+            tools=tools,
+            messages=conversation
+        )
+
+        # 检查是否完成
+        if response.stop_reason == "end_turn":
+            return response.content[0].text
+
+        # 执行工具调用
+        if response.stop_reason == "tool_use":
+            tool_use = response.content[-1]
+            result = execute_tool(tool_use.name, tool_use.input)
+
+            # 将结果反馈给 Agent
+            conversation.append({
+                "role": "assistant",
+                "content": response.content
+            })
+            conversation.append({
+                "role": "user",
+                "content": [{
+                    "type": "tool_result",
+                    "tool_use_id": tool_use.id,
+                    "content": result
+                }]
+            })
+
+def execute_tool(name, params):
+    # 实际执行工具逻辑
+    tools_map = {
+        "list_files": lambda p: os.listdir(p["path"]),
+        "create_folder": lambda p: os.mkdir(p["path"]),
+        # ... 更多工具
+    }
+    return tools_map[name](params)`,
+                bestPractices: [
+                    "限制最大循环次数，防止 Agent 陷入死循环",
+                    "记录每一步的 Thought，方便调试和优化",
+                    "为工具返回清晰的结果描述，帮助 Agent 理解"
+                ]
+            },
+            {
+                id: "tool-calling",
+                title: "工具调用机制",
+                timestamp: 180,
+                content: `
+                    <h3 class="text-lg font-bold mb-3">Function Calling：Agent 的手和脚</h3>
+                    <p class="mb-4">工具调用（Function Calling / Tool Use）是 Agent 与外部世界交互的桥梁。LLM 本身只能生成文本，但通过工具调用，它可以：</p>
+
+                    <ul class="space-y-2 mb-4">
+                        <li>✅ 读写文件</li>
+                        <li>✅ 访问数据库</li>
+                        <li>✅ 调用 API</li>
+                        <li>✅ 执行代码</li>
+                        <li>✅ 控制硬件设备</li>
+                    </ul>
+
+                    <h4 class="font-bold mb-2">工具定义：JSON Schema</h4>
+                    <p class="mb-3 text-sm text-gray-600">Agent 需要知道'有哪些工具可用'以及'每个工具的参数'。这通过 JSON Schema 来描述：</p>
+
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4 text-sm overflow-x-auto">
+<pre>{
+  "name": "search_files",
+  "description": "在指定目录中搜索文件。支持按文件名、扩展名、修改日期过滤。",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "directory": {
+        "type": "string",
+        "description": "要搜索的目录路径"
+      },
+      "pattern": {
+        "type": "string",
+        "description": "文件名匹配模式，支持通配符"
+      },
+      "file_type": {
+        "type": "string",
+        "enum": ["all", "file", "directory"],
+        "description": "文件类型过滤"
+      }
+    },
+    "required": ["directory", "pattern"]
+  }
+}</pre>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4">
+                        <p class="font-semibold mb-2">⚠️ 工具设计的黄金法则：</p>
+                        <ol class="list-decimal list-inside space-y-1 text-sm">
+                            <li><strong>单一职责</strong> - 一个工具只做一件事</li>
+                            <li><strong>清晰命名</strong> - 从名字就能看出功能</li>
+                            <li><strong>详细描述</strong> - description 要写清楚使用场景</li>
+                            <li><strong>参数明确</strong> - 必填/可选参数要标注清楚</li>
+                            <li><strong>错误友好</strong> - 返回可读的错误信息</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="font-bold mb-2">工具调用流程</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs">1</span>
+                            <div>
+                                <strong>工具注册</strong><br>
+                                开发者将工具列表和 Schema 提供给 LLM
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs">2</span>
+                            <div>
+                                <strong>任务理解</strong><br>
+                                LLM 分析用户需求，判断需要使用哪个工具
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs">3</span>
+                            <div>
+                                <strong>参数生成</strong><br>
+                                LLM 生成符合 Schema 的参数 JSON
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-xs">4</span>
+                            <div>
+                                <strong>工具执行</strong><br>
+                                系统执行工具函数，获取返回结果
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-xs">5</span>
+                            <div>
+                                <strong>结果反馈</strong><br>
+                                将结果返回给 LLM，LLM 继续推理或给出最终答案
+                            </div>
+                        </div>
+                    </div>
+                `,
+                corePoints: [
+                    "工具的 description 是 LLM 选择工具的关键依据",
+                    "参数验证要严格，防止生成无效的调用",
+                    "工具返回的信息要对 LLM 友好，便于理解"
+                ],
+                codeExample: `// Anthropic Claude 工具调用示例
+const tools = [
+    {
+        name: "get_weather",
+        description: "获取指定城市的当前天气信息，包括温度、湿度、天气状况",
+        input_schema: {
+            type: "object",
+            properties: {
+                city: {
+                    type: "string",
+                    description: "城市名称，例如：北京、上海"
+                },
+                unit: {
+                    type: "string",
+                    enum: ["celsius", "fahrenheit"],
+                    description: "温度单位"
+                }
+            },
+            required: ["city"]
+        }
+    }
+];
+
+// 调用 Claude
+const response = await anthropic.messages.create({
+    model: "claude-3-5-sonnet-20241022",
+    max_tokens: 1024,
+    tools: tools,
+    messages: [
+        { role: "user", content: "北京现在天气怎么样？" }
+    ]
+});
+
+// Claude 会返回 tool_use
+if (response.stop_reason === "tool_use") {
+    const toolUse = response.content.find(c => c.type === "tool_use");
+    console.log(toolUse.name);   // "get_weather"
+    console.log(toolUse.input);  // { city: "北京", unit: "celsius" }
+
+    // 执行工具
+    const result = await getWeather(toolUse.input.city, toolUse.input.unit);
+
+    // 将结果反馈给 Claude
+    const finalResponse = await anthropic.messages.create({
+        model: "claude-3-5-sonnet-20241022",
+        max_tokens: 1024,
+        tools: tools,
+        messages: [
+            { role: "user", content: "北京现在天气怎么样？" },
+            { role: "assistant", content: response.content },
+            {
+                role: "user",
+                content: [{
+                    type: "tool_result",
+                    tool_use_id: toolUse.id,
+                    content: JSON.stringify(result)
+                }]
+            }
+        ]
+    });
+}`,
+                bestPractices: [
+                    "先从 3-5 个简单工具开始，不要一次性定义太多",
+                    "工具名使用动词开头：get_、create_、update_、delete_",
+                    "测试时记录 LLM 的工具选择日志，发现问题及时优化描述"
+                ]
+            }
+        ],
+        externalLinks: [
+            {
+                title: "Anthropic Tool Use 官方文档",
+                url: "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
+                description: "Claude 工具调用的完整指南"
+            },
+            {
+                title: "LangChain Agent 概念",
+                url: "https://python.langchain.com/docs/concepts/agents/",
+                description: "Agent 的理论基础和实现模式"
+            },
+            {
+                title: "ReAct 论文",
+                url: "https://arxiv.org/abs/2210.03629",
+                description: "Reasoning and Acting 的原始研究论文"
+            }
+        ]
+    },
+    // Day 2-7 占位数据
+    {
+        day: 2,
+        title: "Prompt 工程与优化",
+        subtitle: "掌握提示工程技巧",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "📝",
+        chapters: []
+    },
+    {
+        day: 3,
+        title: "MCP 协议深入",
+        subtitle: "理解模型上下文协议",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🔌",
+        chapters: []
+    },
+    {
+        day: 4,
+        title: "记忆系统设计",
+        subtitle: "构建长期记忆能力",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "💾",
+        chapters: []
+    },
+    {
+        day: 5,
+        title: "Agent 编排",
+        subtitle: "多Agent协作模式",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🎭",
+        chapters: []
+    },
+    {
+        day: 6,
+        title: "实战项目",
+        subtitle: "完整Agent应用开发",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🛠️",
+        chapters: []
+    },
+    {
+        day: 7,
+        title: "部署与优化",
+        subtitle: "生产环境最佳实践",
+        duration: "待制作",
+        videoUrl: null,
+        icon: "🚀",
+        chapters: []
+    }
+];
+
+// 导出数据
+window.courseData = courseData;
