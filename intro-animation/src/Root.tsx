@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { AgentAcademyIntro } from "./AgentAcademyIntro";
 import { Day0EnvironmentSetup } from "./Day0EnvironmentSetup";
 import { Day1AgentArchitecture } from "./Day1AgentArchitecture";
+import { Day2PromptEngineering } from "./Day2PromptEngineering";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -57,6 +58,28 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+      <Composition
+        id="Day2PromptEngineering"
+        component={Day2PromptEngineering}
+        durationInFrames={1800}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          language: "zh" as const,
+        }}
+      />
+      <Composition
+        id="Day2PromptEngineeringEN"
+        component={Day2PromptEngineering}
+        durationInFrames={1800}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          language: "en" as const,
+        }}
       />
     </>
   );
