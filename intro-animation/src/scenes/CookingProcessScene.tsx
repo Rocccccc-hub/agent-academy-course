@@ -5,13 +5,15 @@ import { typography } from "../utils/typography";
 import { fadeIn, bounceScale } from "../utils/animations";
 import { IconNode } from "../components/IconNode";
 import { AnnotationLabel } from "../components/AnnotationLabel";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 6: Cooking Process (8 seconds / 240 frames)
  * Chef cooks with fire, ingredients, steam particles, memory note, and progress ring
  */
-export const CookingProcessScene: React.FC = () => {
+export const CookingProcessScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -89,7 +91,7 @@ export const CookingProcessScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        烹饪过程
+        {t.cookingTitle}
       </div>
 
       {/* Chef */}
@@ -287,7 +289,7 @@ export const CookingProcessScene: React.FC = () => {
                 fontWeight: typography.semibold,
               }}
             >
-              {writingProgress > 0 && "此顾客喜欢川菜".substring(0, Math.floor(writingProgress * 8))}
+              {writingProgress > 0 && t.cookingNote.substring(0, Math.floor(writingProgress * t.cookingNote.length))}
             </div>
 
             {/* Pen icon (follows text) */}
@@ -317,7 +319,7 @@ export const CookingProcessScene: React.FC = () => {
         }}
       >
         <AnnotationLabel
-          text="记录本 = Memory"
+          text={t.cookingAnnotation}
           color={colors.memory}
           fontSize={36}
         />

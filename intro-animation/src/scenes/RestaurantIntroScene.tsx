@@ -4,13 +4,15 @@ import { colors } from "../utils/colors";
 import { typography } from "../utils/typography";
 import { fadeIn, bounceScale } from "../utils/animations";
 import { IconNode } from "../components/IconNode";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 2: Restaurant Introduction (5 seconds / 150 frames)
  * Introduces the restaurant metaphor with all key elements
  */
-export const RestaurantIntroScene: React.FC = () => {
+export const RestaurantIntroScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -29,9 +31,9 @@ export const RestaurantIntroScene: React.FC = () => {
 
   // Bottom tools
   const tools = [
-    { icon: "📖", label: "菜谱", startFrame: 80 },
-    { icon: "🥘", label: "厨具", startFrame: 90 },
-    { icon: "📓", label: "记录本", startFrame: 100 },
+    { icon: "📖", label: t.recipe, startFrame: 80 },
+    { icon: "🥘", label: t.tools, startFrame: 90 },
+    { icon: "📓", label: t.notebook, startFrame: 100 },
   ];
 
   // Connection lines
@@ -56,7 +58,7 @@ export const RestaurantIntroScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        AI Agent 就像一个智能餐厅
+        {t.introTitle}
       </div>
 
       {/* Restaurant Building (Center) */}
@@ -87,7 +89,7 @@ export const RestaurantIntroScene: React.FC = () => {
       >
         <IconNode
           icon="👤"
-          label="顾客"
+          label={t.customer}
           color={colors.customer}
           opacity={customerOpacity}
           scale={customerScale}
@@ -105,7 +107,7 @@ export const RestaurantIntroScene: React.FC = () => {
       >
         <IconNode
           icon="👨‍🍳"
-          label="厨师"
+          label={t.chef}
           color={colors.chef}
           opacity={chefOpacity}
           scale={chefScale}

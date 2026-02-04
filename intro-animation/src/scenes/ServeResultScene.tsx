@@ -5,13 +5,15 @@ import { typography } from "../utils/typography";
 import { fadeIn, bounceScale } from "../utils/animations";
 import { IconNode } from "../components/IconNode";
 import { SpeechBubble } from "../components/SpeechBubble";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 7: Serve Result (5 seconds / 150 frames)
  * Dish moves from chef to customer along bezier path
  */
-export const ServeResultScene: React.FC = () => {
+export const ServeResultScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -41,15 +43,15 @@ export const ServeResultScene: React.FC = () => {
   const controlY = 300; // Arc upward
 
   // Calculate position on bezier curve
-  const t = dishProgress;
+  const bezierT = dishProgress;
   const dishX =
-    Math.pow(1 - t, 2) * startX +
-    2 * (1 - t) * t * controlX +
-    Math.pow(t, 2) * endX;
+    Math.pow(1 - bezierT, 2) * startX +
+    2 * (1 - bezierT) * bezierT * controlX +
+    Math.pow(bezierT, 2) * endX;
   const dishY =
-    Math.pow(1 - t, 2) * startY +
-    2 * (1 - t) * t * controlY +
-    Math.pow(t, 2) * endY;
+    Math.pow(1 - bezierT, 2) * startY +
+    2 * (1 - bezierT) * bezierT * controlY +
+    Math.pow(bezierT, 2) * endY;
 
   const dishOpacity = frame >= 20 && frame < 120 ? 1 : 0;
 
@@ -87,7 +89,7 @@ export const ServeResultScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        上菜完成
+        {t.serveMessage}
       </div>
 
       {/* Chef (right) */}
@@ -187,7 +189,7 @@ export const ServeResultScene: React.FC = () => {
         }}
       >
         <SpeechBubble
-          text="这就是您要的拉面！"
+          text={t.serveMessage}
           direction="right"
           color={colors.result}
           opacity={speechOpacity}
@@ -228,7 +230,7 @@ export const ServeResultScene: React.FC = () => {
             fontWeight: typography.bold,
           }}
         >
-          Agent 成功处理请求
+          {t.serveSuccess}
         </div>
       </div>
     </AbsoluteFill>

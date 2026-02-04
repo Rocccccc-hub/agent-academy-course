@@ -3,12 +3,16 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../utils/colors";
 import { typography } from "../utils/typography";
 import { fadeIn, bounceScale, pulse } from "../utils/animations";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 1: Restaurant Title (4 seconds / 120 frames)
  * Shows title and introduces the restaurant metaphor
  */
-export const RestaurantTitleScene: React.FC = () => {
+export const RestaurantTitleScene: React.FC<{ language?: Language }> = ({
+  language = "zh",
+}) => {
+  const t = texts[language];
   const frame = useCurrentFrame();
 
   // Icon animations
@@ -56,7 +60,7 @@ export const RestaurantTitleScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        智能餐厅：理解 AI Agent
+        {t.title}
       </div>
 
       {/* Subtitle */}
@@ -71,7 +75,7 @@ export const RestaurantTitleScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        通过餐厅类比理解 Agent 工作原理
+        {t.subtitle}
       </div>
     </AbsoluteFill>
   );

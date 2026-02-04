@@ -6,15 +6,17 @@ import { fadeIn, bounceScale, pulse, typingEffect } from "../utils/animations";
 import { IconNode } from "../components/IconNode";
 import { SpeechBubble } from "../components/SpeechBubble";
 import { AnnotationLabel } from "../components/AnnotationLabel";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 4: Chef Receives Order (6 seconds / 180 frames)
  * Menu flies to chef, brain appears, chef thinks
  */
-export const ChefReceivesScene: React.FC = () => {
+export const ChefReceivesScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
-  const thoughtText = "顾客想吃川菜，我需要查看菜谱";
+  const thoughtText = t.chefThought;
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -79,7 +81,7 @@ export const ChefReceivesScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        厨师接单
+        {t.chefTitle}
       </div>
 
       {/* Flying Menu Paper */}
@@ -109,7 +111,7 @@ export const ChefReceivesScene: React.FC = () => {
       >
         <IconNode
           icon="👨‍🍳"
-          label="厨师"
+          label={t.chef}
           color={colors.chef}
           opacity={chefOpacity}
           scale={chefScale * chefBounce}
@@ -165,7 +167,7 @@ export const ChefReceivesScene: React.FC = () => {
         }}
       >
         <AnnotationLabel
-          text="厨师 = Agent | 大脑 = LLM"
+          text={t.chefAnnotation}
           color={colors.chef}
           fontSize={36}
         />

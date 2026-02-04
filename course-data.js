@@ -12,7 +12,10 @@ const courseData = [
             en: "Understanding AI Agents Through Restaurant Analogy"
         },
         duration: "0:45",
-        videoUrl: "./lessons/INTRO-餐厅比喻.mp4",
+        videoUrl: {
+            zh: "./lessons/INTRO-zh.mp4",
+            en: "./lessons/INTRO-en.mp4"
+        },
         icon: "🍽️",
         chapters: [
             {

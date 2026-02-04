@@ -4,13 +4,15 @@ import { colors } from "../utils/colors";
 import { typography } from "../utils/typography";
 import { fadeIn, bounceScale } from "../utils/animations";
 import { AnnotationLabel } from "../components/AnnotationLabel";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 5: Recipe and Tools (8 seconds / 240 frames)
  * Book opens, flips pages, MCP connects recipe to tools, tools fly out
  */
-export const RecipeToolsScene: React.FC = () => {
+export const RecipeToolsScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -30,7 +32,7 @@ export const RecipeToolsScene: React.FC = () => {
   const recipeListOpacity = fadeIn(frame, 65);
 
   // Recipes to display
-  const recipes = ["麻婆豆腐", "宫保鸡丁", "水煮鱼"];
+  const recipes = [t.recipeDish1, t.recipeDish2, t.recipeDish3];
 
   // Highlight selected recipe
   const highlightProgress = interpolate(frame, [85, 100], [0, 1], {
@@ -81,7 +83,7 @@ export const RecipeToolsScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        查阅菜谱获取工具
+        {t.recipeTitle}
       </div>
 
       {/* Recipe Book (closed then opens) */}
@@ -139,7 +141,7 @@ export const RecipeToolsScene: React.FC = () => {
                   textAlign: "center",
                 }}
               >
-                川菜菜谱
+                {t.recipeChapter}
               </div>
 
               {/* Recipe list */}
@@ -326,7 +328,7 @@ export const RecipeToolsScene: React.FC = () => {
         }}
       >
         <AnnotationLabel
-          text="菜谱 = MCP | 厨具 = Tools"
+          text={t.recipeAnnotation}
           color={colors.recipe}
           fontSize={36}
         />

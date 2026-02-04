@@ -204,9 +204,13 @@ function loadDay(day) {
     const videoPlaceholder = document.getElementById('video-placeholder');
 
     if (dayData.videoUrl) {
-        // 处理视频路径：如果是相对路径，转换为基于当前页面的路径
-        let videoSrc = dayData.videoUrl;
-        if (videoSrc.startsWith('../') || videoSrc.startsWith('./')) {
+        // 处理视频路径：支持多语言视频
+        let videoSrc = typeof dayData.videoUrl === 'object'
+            ? dayData.videoUrl[currentLanguage]
+            : dayData.videoUrl;
+
+        // 如果是相对路径，转换为基于当前页面的路径
+        if (videoSrc && (videoSrc.startsWith('../') || videoSrc.startsWith('./'))) {
             const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
             videoSrc = basePath + '/' + videoSrc;
         }

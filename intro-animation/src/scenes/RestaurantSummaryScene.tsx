@@ -4,13 +4,15 @@ import { colors } from "../utils/colors";
 import { typography } from "../utils/typography";
 import { fadeIn, bounceScale } from "../utils/animations";
 import { IconNode } from "../components/IconNode";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 8: Restaurant Summary (4 seconds / 120 frames)
  * Shows all components working together in a circular layout
  */
-export const RestaurantSummaryScene: React.FC = () => {
+export const RestaurantSummaryScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Title animation
   const titleOpacity = fadeIn(frame, 0);
@@ -21,13 +23,13 @@ export const RestaurantSummaryScene: React.FC = () => {
 
   // Surrounding components (circular layout)
   const components = [
-    { icon: "👤", label: "顾客 (User)", color: colors.customer, angle: 0 },
-    { icon: "📝", label: "点菜单 (Prompt)", color: colors.customer, angle: 45 },
-    { icon: "🧠", label: "大脑 (LLM)", color: colors.brain, angle: 90 },
-    { icon: "📖", label: "菜谱 (MCP)", color: colors.recipe, angle: 135 },
-    { icon: "🥘", label: "厨具 (Tools)", color: colors.tools, angle: 180 },
-    { icon: "📓", label: "记录本 (Memory)", color: colors.memory, angle: 225 },
-    { icon: "🍜", label: "菜品 (Result)", color: colors.result, angle: 270 },
+    { icon: "👤", label: `${t.summaryUser}`, color: colors.customer, angle: 0 },
+    { icon: "📝", label: `${t.summaryPrompt}`, color: colors.customer, angle: 45 },
+    { icon: "🧠", label: `${t.summaryLLM}`, color: colors.brain, angle: 90 },
+    { icon: "📖", label: `${t.summaryMCP}`, color: colors.recipe, angle: 135 },
+    { icon: "🥘", label: `${t.summaryTools}`, color: colors.tools, angle: 180 },
+    { icon: "📓", label: `${t.summaryMemory}`, color: colors.memory, angle: 225 },
+    { icon: "🍜", label: `${t.summaryResult}`, color: colors.result, angle: 270 },
   ];
 
   const radius = 350;
@@ -56,7 +58,7 @@ export const RestaurantSummaryScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        智能餐厅：完整协作流程
+        {t.summaryTitle}
       </div>
 
       {/* Center Chef (Agent) */}
@@ -70,7 +72,7 @@ export const RestaurantSummaryScene: React.FC = () => {
       >
         <IconNode
           icon="👨‍🍳"
-          label="厨师 (Agent)"
+          label={t.chef}
           color={colors.chef}
           iconSize={150}
           labelSize={typography.subheading}
@@ -159,7 +161,7 @@ export const RestaurantSummaryScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        这些组件协同工作，完成智能服务 🎯
+        {t.summaryMessage}
       </div>
     </AbsoluteFill>
   );

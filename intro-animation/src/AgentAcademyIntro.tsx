@@ -10,52 +10,59 @@ import { CookingProcessScene } from "./scenes/CookingProcessScene";
 import { ServeResultScene } from "./scenes/ServeResultScene";
 import { RestaurantSummaryScene } from "./scenes/RestaurantSummaryScene";
 import { sceneDurations } from "./utils/timing";
+import { Language } from "./utils/texts";
 
 // Load Noto Sans SC (Source Han Sans) for consistent Chinese font rendering
 const { fontFamily } = loadFont();
 
-export const AgentAcademyIntro: React.FC = () => {
+export interface AgentAcademyIntroProps {
+  language?: Language;
+}
+
+export const AgentAcademyIntro: React.FC<AgentAcademyIntroProps> = ({
+  language = "zh",
+}) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0d1117", fontFamily }}>
       <Series>
-        {/* 场景 1: 餐厅标题 (4秒 / 120帧) */}
+        {/* Scene 1: Restaurant Title (4s / 120 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.title}>
-          <RestaurantTitleScene />
+          <RestaurantTitleScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 2: 餐厅介绍 (5秒 / 150帧) */}
+        {/* Scene 2: Restaurant Intro (5s / 150 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.intro}>
-          <RestaurantIntroScene />
+          <RestaurantIntroScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 3: 顾客点餐 (5秒 / 150帧) */}
+        {/* Scene 3: Customer Order (5s / 150 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.order}>
-          <CustomerOrderScene />
+          <CustomerOrderScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 4: 厨师接单 (6秒 / 180帧) */}
+        {/* Scene 4: Chef Receives (6s / 180 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.receives}>
-          <ChefReceivesScene />
+          <ChefReceivesScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 5: 查阅菜谱获取工具 (8秒 / 240帧) */}
+        {/* Scene 5: Recipe Tools (8s / 240 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.recipe}>
-          <RecipeToolsScene />
+          <RecipeToolsScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 6: 烹饪过程 (8秒 / 240帧) */}
+        {/* Scene 6: Cooking Process (8s / 240 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.cooking}>
-          <CookingProcessScene />
+          <CookingProcessScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 7: 上菜完成 (5秒 / 150帧) */}
+        {/* Scene 7: Serve Result (5s / 150 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.serve}>
-          <ServeResultScene />
+          <ServeResultScene language={language} />
         </Series.Sequence>
 
-        {/* 场景 8: 餐厅总结 (4秒 / 120帧) */}
+        {/* Scene 8: Restaurant Summary (4s / 120 frames) */}
         <Series.Sequence durationInFrames={sceneDurations.summary}>
-          <RestaurantSummaryScene />
+          <RestaurantSummaryScene language={language} />
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

@@ -6,15 +6,17 @@ import { fadeIn, bounceScale, typingEffect, blinkingCursor } from "../utils/anim
 import { IconNode } from "../components/IconNode";
 import { SpeechBubble } from "../components/SpeechBubble";
 import { AnnotationLabel } from "../components/AnnotationLabel";
+import { texts, Language } from "../utils/texts";
 
 /**
  * Scene 3: Customer Order (5 seconds / 150 frames)
  * Customer places an order (User gives prompt)
  */
-export const CustomerOrderScene: React.FC = () => {
+export const CustomerOrderScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
-  const question = "我想吃拉面";
+  const question = t.orderQuestion;
 
   // Customer icon animations
   const customerOpacity = fadeIn(frame, 0);
@@ -55,7 +57,7 @@ export const CustomerOrderScene: React.FC = () => {
           fontWeight: typography.bold,
         }}
       >
-        顾客点餐
+        {t.orderTitle}
       </div>
 
       {/* Customer Icon */}
@@ -69,7 +71,7 @@ export const CustomerOrderScene: React.FC = () => {
       >
         <IconNode
           icon="👤"
-          label="顾客"
+          label={t.customer}
           color={colors.customer}
           opacity={customerOpacity}
           scale={customerScale}
@@ -119,7 +121,7 @@ export const CustomerOrderScene: React.FC = () => {
         }}
       >
         <AnnotationLabel
-          text="顾客 = 用户 | 点菜单 = Prompt"
+          text={t.orderAnnotation}
           color={colors.customer}
           fontSize={36}
         />
