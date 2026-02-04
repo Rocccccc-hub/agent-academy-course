@@ -362,7 +362,7 @@ function renderChapters(dayData) {
 
                 <div class="p-4 md:p-6">
                     <div class="prose prose-invert prose-sm max-w-none text-gh-text text-sm md:text-base">
-                        ${getText(chapter.content)}
+                        ${getText(chapter.content || chapter.description || '')}
                     </div>
 
                     ${chapter.corePoints ? `
