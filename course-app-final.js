@@ -486,6 +486,9 @@ function toggleChapterComplete(chapterId) {
     // 重新渲染章节以更新按钮状态
     const container = document.getElementById('chapters-container');
     renderChapters(dayData);
+
+    // 检查是否所有课程完成
+    checkAllCoursesCompleted();
 }
 
 // 复制代码（从章节内的按钮）
@@ -522,13 +525,18 @@ function handleVideoEnded() {
     saveProgress();
     renderNavigation();
 
+    // 检查是否所有课程完成
+    const allCompleted = checkAllCoursesCompleted();
+
+    if (allCompleted) {
+        return; // 礼花动画会处理后续提示
+    }
+
     // 提示进入下一天
     if (currentDay < courseData.length - 1) {
         if (confirm(`Day ${currentDay} completed! Start Day ${currentDay + 1}?`)) {
             loadDay(currentDay + 1);
         }
-    } else {
-        alert('🎉 Congratulations! You have completed all 8 days of the Agent Academy course!');
     }
 }
 
@@ -629,6 +637,200 @@ function updateUILabels() {
 function getText(obj) {
     if (typeof obj === 'string') return obj;
     return obj[currentLanguage] || obj.zh || obj.en || '';
+}
+
+// 检查所有课程是否完成
+function checkAllCoursesCompleted() {
+    const totalDays = courseData.length;
+    const completedDays = Object.values(progress.days).filter(d => d.completed).length;
+
+    if (completedDays === totalDays) {
+        // 所有课程完成，触发礼花动画
+        playConfettiAnimation();
+        return true;
+    }
+    return false;
+}
+
+// 礼花动画
+function playConfettiAnimation() {
+    // 创建全屏遮罩
+    const overlay = document.createElement('div');
+    overlay.id = 'confetti-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(13, 17, 23, 0.95);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    `;
+
+    // 创建 canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    `;
+
+    // 祝贺文字
+    const message = document.createElement('div');
+    message.style.cssText = `
+        z-index: 10000;
+        text-align: center;
+        color: #e6edf3;
+        animation: scaleIn 0.5s ease 0.3s both;
+    `;
+    message.innerHTML = `
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+        <h1 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; color: #3fb950;">
+            ${currentLanguage === 'zh' ? '恭喜完成！' : 'Congratulations!'}
+        </h1>
+        <p style="font-size: 1.2rem; color: #b1bac4; margin-bottom: 2rem;">
+            ${currentLanguage === 'zh'
+                ? '你已完成 Agent Academy 全部 8 天课程！'
+                : 'You have completed all 8 days of Agent Academy!'}
+        </p>
+        <button id="close-confetti" style="
+            padding: 12px 32px;
+            background: #3fb950;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        " onmouseover="this.style.background='#56d364'" onmouseout="this.style.background='#3fb950'">
+            ${currentLanguage === 'zh' ? '太棒了！' : 'Awesome!'}
+        </button>
+    `;
+
+    overlay.appendChild(canvas);
+    overlay.appendChild(message);
+    document.body.appendChild(overlay);
+
+    // 礼花粒子系统
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const particleCount = 150;
+    const colors = ['#3fb950', '#58a6ff', '#f778ba', '#ffa657', '#bc8cff'];
+
+    // 创建粒子
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            vx: (Math.random() - 0.5) * 8,
+            vy: Math.random() * 3 + 2,
+            radius: Math.random() * 4 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            opacity: 1,
+            gravity: 0.15,
+            friction: 0.99
+        });
+    }
+
+    // 动画循环
+    let animationId;
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p, index) => {
+            // 更新位置
+            p.vy += p.gravity;
+            p.vx *= p.friction;
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // 淡出
+            if (p.y > canvas.height * 0.8) {
+                p.opacity -= 0.02;
+            }
+
+            // 绘制粒子
+            ctx.globalAlpha = p.opacity;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 移除消失的粒子
+            if (p.opacity <= 0) {
+                particles.splice(index, 1);
+            }
+        });
+
+        // 持续发射新粒子（前3秒）
+        if (particles.length < particleCount && Date.now() - startTime < 3000) {
+            for (let i = 0; i < 5; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: -20,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: Math.random() * 3 + 2,
+                    radius: Math.random() * 4 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    opacity: 1,
+                    gravity: 0.15,
+                    friction: 0.99
+                });
+            }
+        }
+
+        if (particles.length > 0) {
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+
+    const startTime = Date.now();
+    animate();
+
+    // 关闭按钮
+    document.getElementById('close-confetti').addEventListener('click', () => {
+        cancelAnimationFrame(animationId);
+        overlay.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+        }, 300);
+    });
+
+    // 添加 CSS 动画
+    if (!document.getElementById('confetti-styles')) {
+        const style = document.createElement('style');
+        style.id = 'confetti-styles';
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            @keyframes scaleIn {
+                from {
+                    transform: scale(0.5);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 
 // 页面加载完成后初始化
