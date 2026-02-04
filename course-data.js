@@ -16,99 +16,79 @@ const courseData = [
         icon: "🍽️",
         chapters: [
             {
-                id: "title",
+                id: "overview",
                 title: {
-                    zh: "餐厅标题",
-                    en: "Restaurant Title"
+                    zh: "课程导览",
+                    en: "Course Overview"
                 },
                 timestamp: 0,
-                description: {
-                    zh: "智能餐厅：理解 AI Agent",
-                    en: "Smart Restaurant: Understanding AI Agent"
-                }
-            },
-            {
-                id: "intro",
-                title: {
-                    zh: "餐厅介绍",
-                    en: "Restaurant Introduction"
-                },
-                timestamp: 4,
-                description: {
-                    zh: "AI Agent 就像一个智能餐厅",
-                    en: "AI Agent is like a smart restaurant"
-                }
-            },
-            {
-                id: "order",
-                title: {
-                    zh: "顾客点餐",
-                    en: "Customer Order"
-                },
-                timestamp: 9,
-                description: {
-                    zh: "用户提出需求（Prompt）",
-                    en: "User makes a request (Prompt)"
-                }
-            },
-            {
-                id: "receives",
-                title: {
-                    zh: "厨师接单",
-                    en: "Chef Receives Order"
-                },
-                timestamp: 14,
-                description: {
-                    zh: "Agent 接收并思考（LLM）",
-                    en: "Agent receives and thinks (LLM)"
-                }
-            },
-            {
-                id: "recipe",
-                title: {
-                    zh: "查阅菜谱获取工具",
-                    en: "Consulting Recipe for Tools"
-                },
-                timestamp: 20,
-                description: {
-                    zh: "通过 MCP 协议连接工具",
-                    en: "Connecting tools via MCP protocol"
-                }
-            },
-            {
-                id: "cooking",
-                title: {
-                    zh: "烹饪过程",
-                    en: "Cooking Process"
-                },
-                timestamp: 28,
-                description: {
-                    zh: "执行任务并记录（Memory）",
-                    en: "Executing tasks and recording (Memory)"
-                }
-            },
-            {
-                id: "serve",
-                title: {
-                    zh: "上菜完成",
-                    en: "Serving Complete"
-                },
-                timestamp: 36,
-                description: {
-                    zh: "返回结果给用户",
-                    en: "Returning results to user"
-                }
-            },
-            {
-                id: "summary",
-                title: {
-                    zh: "餐厅总结",
-                    en: "Restaurant Summary"
-                },
-                timestamp: 41,
-                description: {
-                    zh: "完整协作流程回顾",
-                    en: "Complete workflow review"
+                content: {
+                    zh: `
+                        <h3 class="text-lg font-bold mb-3 text-gh-text">通过餐厅类比理解 AI Agent</h3>
+                        <p class="mb-4 text-gh-text">这是一个45秒的动画，通过生动的餐厅比喻帮助你快速理解 AI Agent 的工作原理。</p>
+
+                        <div class="bg-blue-950/30 border border-blue-500/50 rounded p-4 mb-4">
+                            <h4 class="font-semibold mb-3 text-blue-200">🍽️ 核心概念映射：</h4>
+                            <ul class="space-y-2 text-gh-text text-sm">
+                                <li>👤 <strong>顾客</strong> = 用户（User）- 提出需求</li>
+                                <li>👨‍🍳 <strong>厨师</strong> = Agent - 处理请求的核心</li>
+                                <li>🧠 <strong>大脑</strong> = LLM（大语言模型）- 思考决策</li>
+                                <li>📖 <strong>菜谱</strong> = MCP 协议 - 连接工具的标准</li>
+                                <li>🥘 <strong>厨具</strong> = Tools（工具）- 执行具体操作</li>
+                                <li>📓 <strong>记录本</strong> = Memory（记忆）- 记住上下文</li>
+                                <li>📝 <strong>点菜单</strong> = Prompt - 用户输入</li>
+                                <li>🍜 <strong>菜品</strong> = Result - 最终输出</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-950/20 border border-green-500/50 rounded p-4">
+                            <h4 class="font-semibold mb-2 text-green-200">💡 完整流程：</h4>
+                            <ol class="space-y-2 text-gh-text text-sm list-decimal list-inside">
+                                <li><strong>顾客点餐</strong> - 用户通过 Prompt 提出需求</li>
+                                <li><strong>厨师接单</strong> - Agent 接收请求，LLM 开始思考</li>
+                                <li><strong>查阅菜谱</strong> - 通过 MCP 协议找到合适的工具</li>
+                                <li><strong>烹饪过程</strong> - 使用工具执行任务，Memory 记录过程</li>
+                                <li><strong>上菜完成</strong> - 将结果返回给用户</li>
+                            </ol>
+                        </div>
+
+                        <p class="mt-4 text-sm text-gh-text-secondary">
+                            💡 <strong>提示</strong>：观看完整动画，直观理解 Agent 各组件如何协同工作！
+                        </p>
+                    `,
+                    en: `
+                        <h3 class="text-lg font-bold mb-3 text-gh-text">Understanding AI Agents Through Restaurant Analogy</h3>
+                        <p class="mb-4 text-gh-text">This 45-second animation uses a vivid restaurant metaphor to help you quickly understand how AI Agents work.</p>
+
+                        <div class="bg-blue-950/30 border border-blue-500/50 rounded p-4 mb-4">
+                            <h4 class="font-semibold mb-3 text-blue-200">🍽️ Core Concept Mapping:</h4>
+                            <ul class="space-y-2 text-gh-text text-sm">
+                                <li>👤 <strong>Customer</strong> = User - Makes requests</li>
+                                <li>👨‍🍳 <strong>Chef</strong> = Agent - Core request processor</li>
+                                <li>🧠 <strong>Brain</strong> = LLM (Large Language Model) - Thinking & decision-making</li>
+                                <li>📖 <strong>Recipe</strong> = MCP Protocol - Standard for connecting tools</li>
+                                <li>🥘 <strong>Utensils</strong> = Tools - Execute specific operations</li>
+                                <li>📓 <strong>Notebook</strong> = Memory - Remember context</li>
+                                <li>📝 <strong>Order</strong> = Prompt - User input</li>
+                                <li>🍜 <strong>Dish</strong> = Result - Final output</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-950/20 border border-green-500/50 rounded p-4">
+                            <h4 class="font-semibold mb-2 text-green-200">💡 Complete Workflow:</h4>
+                            <ol class="space-y-2 text-gh-text text-sm list-decimal list-inside">
+                                <li><strong>Customer Orders</strong> - User makes request via Prompt</li>
+                                <li><strong>Chef Receives</strong> - Agent receives request, LLM starts thinking</li>
+                                <li><strong>Consult Recipe</strong> - Find appropriate tools via MCP protocol</li>
+                                <li><strong>Cooking Process</strong> - Execute tasks with tools, Memory records process</li>
+                                <li><strong>Serve Dish</strong> - Return results to user</li>
+                            </ol>
+                        </div>
+
+                        <p class="mt-4 text-sm text-gh-text-secondary">
+                            💡 <strong>Tip</strong>: Watch the full animation to intuitively understand how Agent components work together!
+                        </p>
+                    `
                 }
             }
         ],
