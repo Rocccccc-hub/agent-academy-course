@@ -219,7 +219,7 @@ export const Day1SummaryScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: 120,
+          bottom: 230,
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",
@@ -257,11 +257,13 @@ export const Day1SummaryScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: 40,
+          bottom: 140,
           fontSize: typography.body,
           color: colors.result,
           fontWeight: typography.bold,
           opacity: bottomOpacity,
+          textAlign: "center",
+          width: "100%",
         }}
       >
         🎓 掌握 ReAct 循环，理解 Agent 核心机制

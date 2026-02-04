@@ -159,7 +159,7 @@ export const Day1ObserveStageScene: React.FC = () => {
         style={{
           position: "absolute",
           right: 200,
-          bottom: 150,
+          bottom: 280,
           opacity: decisionOpacity,
           transform: `scale(${decisionScale})`,
         }}
@@ -188,10 +188,12 @@ export const Day1ObserveStageScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: 60,
-          fontSize: typography.caption,
+          bottom: 150,
+          fontSize: typography.body,
           color: colors.textSecondary,
           opacity: fadeIn(frame, 380),
+          textAlign: "center",
+          width: "100%",
         }}
       >
         💡 如果目标未完成，Agent 将进入下一轮 ReAct 循环

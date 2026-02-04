@@ -148,7 +148,7 @@ export const Day1ActStageScene: React.FC = () => {
         style={{
           position: "absolute",
           right: 200,
-          bottom: 150,
+          bottom: 200,
           opacity: resultOpacity,
           transform: `scale(${resultScale})`,
         }}

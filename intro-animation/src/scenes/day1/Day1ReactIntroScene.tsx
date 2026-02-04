@@ -225,10 +225,12 @@ export const Day1ReactIntroScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: 100,
+          bottom: 150,
           fontSize: typography.body,
           color: colors.textSecondary,
           opacity: fadeIn(frame, 380),
+          textAlign: "center",
+          width: "100%",
         }}
       >
         💡 Agent 通过不断循环这三个步骤来完成复杂任务
