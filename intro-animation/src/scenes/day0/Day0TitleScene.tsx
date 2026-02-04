@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale, pulse } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 1: Title (15 seconds / 450 frames)
  * Introduction to Environment Setup
  */
-export const Day0TitleScene: React.FC = () => {
+export const Day0TitleScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   // Icon animations
   const iconOpacity = fadeIn(frame, 0);
@@ -46,7 +48,7 @@ export const Day0TitleScene: React.FC = () => {
           letterSpacing: "0.1em",
         }}
       >
-        DAY 0 - 准备阶段
+        {t.day0Label}
       </div>
 
       {/* Toolbox Icon */}
@@ -74,7 +76,7 @@ export const Day0TitleScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        搭建你的 Agent 工作台
+        {t.day0Title}
       </div>
 
       {/* Subtitle */}
@@ -89,7 +91,7 @@ export const Day0TitleScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        准备工作，让学习事半功倍
+        {t.day0Subtitle}
       </div>
     </AbsoluteFill>
   );

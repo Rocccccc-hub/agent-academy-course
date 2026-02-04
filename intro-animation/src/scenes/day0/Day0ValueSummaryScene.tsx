@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale, pulse } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 6: Value Summary (15 seconds / 450 frames)
  * Shows the three key benefits of having a dev environment
  */
-export const Day0ValueSummaryScene: React.FC = () => {
+export const Day0ValueSummaryScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -22,24 +24,24 @@ export const Day0ValueSummaryScene: React.FC = () => {
   const values = [
     {
       icon: "⚡",
-      title: "即学即用",
-      desc: "写完代码立即运行\n实时看到效果",
+      title: t.day0Value1Title,
+      desc: t.day0Value1Desc,
       color: colors.result,
       delay: 100,
       angle: -90,
     },
     {
       icon: "🔄",
-      title: "反复练习",
-      desc: "本地环境随时可用\n不受次数限制",
+      title: t.day0Value2Title,
+      desc: t.day0Value2Desc,
       color: colors.chef,
       delay: 160,
       angle: 150,
     },
     {
       icon: "🚀",
-      title: "自由探索",
-      desc: "不受在线平台限制\n可以深度定制",
+      title: t.day0Value3Title,
+      desc: t.day0Value3Desc,
       color: colors.customer,
       delay: 220,
       angle: 30,
@@ -71,7 +73,7 @@ export const Day0ValueSummaryScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        开发环境的三大价值
+        {t.day0ValueTitle}
       </div>
 
       {/* Central Icon */}
@@ -221,7 +223,7 @@ export const Day0ValueSummaryScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        🎯 现在开始，让我们一起探索 Agent 的世界！
+        {t.day0ValueMessage}
       </div>
     </AbsoluteFill>
   );

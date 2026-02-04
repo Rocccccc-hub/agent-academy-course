@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 3: Three Core Tools (15 seconds / 450 frames)
  * Shows the three essential tools needed
  */
-export const Day0ThreeToolsScene: React.FC = () => {
+export const Day0ThreeToolsScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -17,28 +19,28 @@ export const Day0ThreeToolsScene: React.FC = () => {
   const tools = [
     {
       icon: "💻",
-      title: "代码编辑器",
-      subtitle: "VS Code / Cursor",
-      analogy: "厨师的操作台",
-      desc: "写代码的地方",
+      title: t.day0Tool1Title,
+      subtitle: t.day0Tool1Subtitle,
+      analogy: t.day0Tool1Analogy,
+      desc: t.day0Tool1Desc,
       color: colors.customer,
       delay: 50,
     },
     {
       icon: "🐍",
-      title: "Python 环境",
-      subtitle: "Python 3.10+",
-      analogy: "厨房的炉灶",
-      desc: "运行程序的引擎",
+      title: t.day0Tool2Title,
+      subtitle: t.day0Tool2Subtitle,
+      analogy: t.day0Tool2Analogy,
+      desc: t.day0Tool2Desc,
       color: colors.chef,
       delay: 140,
     },
     {
       icon: "🔑",
-      title: "AI API 密钥",
-      subtitle: "Claude / GPT",
-      analogy: "食材供应商",
-      desc: "连接 AI 大脑的钥匙",
+      title: t.day0Tool3Title,
+      subtitle: t.day0Tool3Subtitle,
+      analogy: t.day0Tool3Analogy,
+      desc: t.day0Tool3Desc,
       color: colors.brain,
       delay: 230,
     },
@@ -66,7 +68,7 @@ export const Day0ThreeToolsScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        三大核心工具
+        {t.day0ThreeToolsTitle}
       </div>
 
       {/* Three Tools */}
@@ -149,7 +151,7 @@ export const Day0ThreeToolsScene: React.FC = () => {
                     textAlign: "center",
                   }}
                 >
-                  类比：{tool.analogy}
+                  {language === "zh" ? "类比：" : "Analogy: "}{tool.analogy}
                 </div>
 
                 {/* Description */}
@@ -215,7 +217,7 @@ export const Day0ThreeToolsScene: React.FC = () => {
           opacity: fadeIn(frame, 380),
         }}
       >
-        🎯 三个工具协同工作，打造完整的开发环境
+        {t.day0ThreeToolsNote}
       </div>
     </AbsoluteFill>
   );

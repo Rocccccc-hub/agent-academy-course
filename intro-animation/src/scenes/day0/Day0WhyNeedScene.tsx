@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 2: Why Need Environment? (15 seconds / 450 frames)
  * Uses cooking analogy to explain why setup is necessary
  */
-export const Day0WhyNeedScene: React.FC = () => {
+export const Day0WhyNeedScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -43,7 +45,7 @@ export const Day0WhyNeedScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        为什么需要开发环境？
+        {t.day0WhyTitle}
       </div>
 
       {/* Left Side: Without Setup */}
@@ -79,7 +81,7 @@ export const Day0WhyNeedScene: React.FC = () => {
             marginBottom: 25,
           }}
         >
-          没有准备
+          {t.day0WithoutTitle}
         </div>
 
         {/* Problems */}
@@ -92,13 +94,13 @@ export const Day0WhyNeedScene: React.FC = () => {
           }}
         >
           <div style={{ fontSize: typography.body, color: colors.textPrimary, marginBottom: 15 }}>
-            😰 不知道在哪里写代码
+            {t.day0WithoutItem1}
           </div>
           <div style={{ fontSize: typography.body, color: colors.textPrimary, marginBottom: 15 }}>
-            🤷 代码写了无法运行
+            {t.day0WithoutItem2}
           </div>
           <div style={{ fontSize: typography.body, color: colors.textPrimary }}>
-            ⏰ 每次都要重新配置
+            {t.day0WithoutItem3}
           </div>
         </div>
       </div>
@@ -136,7 +138,7 @@ export const Day0WhyNeedScene: React.FC = () => {
             marginBottom: 25,
           }}
         >
-          准备就绪
+          {t.day0WithTitle}
         </div>
 
         {/* Benefits */}
@@ -149,13 +151,13 @@ export const Day0WhyNeedScene: React.FC = () => {
           }}
         >
           <div style={{ fontSize: typography.body, color: colors.textPrimary, marginBottom: 15 }}>
-            💻 专业工具随时可用
+            {t.day0WithItem1}
           </div>
           <div style={{ fontSize: typography.body, color: colors.textPrimary, marginBottom: 15 }}>
-            ⚡ 写完代码立即测试
+            {t.day0WithItem2}
           </div>
           <div style={{ fontSize: typography.body, color: colors.textPrimary }}>
-            🎯 专注学习不分心
+            {t.day0WithItem3}
           </div>
         </div>
       </div>
@@ -171,7 +173,7 @@ export const Day0WhyNeedScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        💡 就像做菜前要准备好厨房，开发 Agent 也需要搭建工作环境
+        {t.day0WhyAnalogy}
       </div>
     </AbsoluteFill>
   );

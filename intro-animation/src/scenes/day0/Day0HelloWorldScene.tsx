@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale, typingEffect } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 5: Hello World Test (15 seconds / 450 frames)
  * Shows first Agent program running successfully
  */
-export const Day0HelloWorldScene: React.FC = () => {
+export const Day0HelloWorldScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -43,7 +45,7 @@ export const Day0HelloWorldScene: React.FC = () => {
 
   // Terminal output
   const terminalOpacity = fadeIn(frame, 280);
-  const outputText = "Hello, I'm your first Agent! 👋";
+  const outputText = t.day0HelloOutput;
   const typingChars = typingEffect(frame, 300, 60, outputText.length);
   const displayedOutput = outputText.substring(0, typingChars);
 
@@ -70,7 +72,7 @@ export const Day0HelloWorldScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        第一个 Agent 程序
+        {t.day0HelloTitle}
       </div>
 
       {/* Code Editor */}
@@ -100,7 +102,7 @@ export const Day0HelloWorldScene: React.FC = () => {
           <div style={{ width: 12, height: 12, borderRadius: "50%", backgroundColor: "#ffbd2e" }} />
           <div style={{ width: 12, height: 12, borderRadius: "50%", backgroundColor: "#27c93f" }} />
           <div style={{ fontSize: typography.caption, color: colors.textSecondary, marginLeft: 15 }}>
-            hello_agent.py
+            {t.day0HelloFilename}
           </div>
         </div>
 
@@ -160,7 +162,7 @@ export const Day0HelloWorldScene: React.FC = () => {
               transition: "all 0.1s",
             }}
           >
-            ▶️ 运行程序
+            {t.day0HelloRunButton}
           </div>
         </div>
       </div>
@@ -187,7 +189,7 @@ export const Day0HelloWorldScene: React.FC = () => {
             color: colors.textSecondary,
           }}
         >
-          终端输出
+          {t.day0HelloTerminal}
         </div>
 
         {/* Terminal Content */}
@@ -241,7 +243,7 @@ export const Day0HelloWorldScene: React.FC = () => {
                 fontWeight: typography.bold,
               }}
             >
-              运行成功！
+              {t.day0HelloSuccess}
             </div>
           </div>
         )}
@@ -257,7 +259,7 @@ export const Day0HelloWorldScene: React.FC = () => {
           opacity: fadeIn(frame, 400),
         }}
       >
-        🎉 恭喜！你的开发环境已经准备就绪
+        {t.day0HelloMessage}
       </div>
     </AbsoluteFill>
   );

@@ -7,6 +7,7 @@ import { Day0ThreeToolsScene } from "./scenes/day0/Day0ThreeToolsScene";
 import { Day0InstallFlowScene } from "./scenes/day0/Day0InstallFlowScene";
 import { Day0HelloWorldScene } from "./scenes/day0/Day0HelloWorldScene";
 import { Day0ValueSummaryScene } from "./scenes/day0/Day0ValueSummaryScene";
+import { Language } from "./utils/texts";
 
 // Load Noto Sans SC for consistent Chinese font rendering
 const { fontFamily } = loadFont();
@@ -14,38 +15,44 @@ const { fontFamily } = loadFont();
 // Each scene is 15 seconds (450 frames at 30fps)
 const SCENE_DURATION = 450;
 
-export const Day0EnvironmentSetup: React.FC = () => {
+export interface Day0EnvironmentSetupProps {
+  language?: Language;
+}
+
+export const Day0EnvironmentSetup: React.FC<Day0EnvironmentSetupProps> = ({
+  language = "zh",
+}) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0d1117", fontFamily }}>
       <Series>
-        {/* Scene 1: Title - 搭建你的 Agent 工作台 */}
+        {/* Scene 1: Title - Build Your Agent Workbench */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0TitleScene />
+          <Day0TitleScene language={language} />
         </Series.Sequence>
 
-        {/* Scene 2: Why Need? - 为什么需要开发环境 */}
+        {/* Scene 2: Why Need? - Why Need Development Environment */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0WhyNeedScene />
+          <Day0WhyNeedScene language={language} />
         </Series.Sequence>
 
-        {/* Scene 3: Three Core Tools - 三大核心工具 */}
+        {/* Scene 3: Three Core Tools */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0ThreeToolsScene />
+          <Day0ThreeToolsScene language={language} />
         </Series.Sequence>
 
-        {/* Scene 4: Install Flow - 快速安装流程 */}
+        {/* Scene 4: Install Flow - Quick Installation Process */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0InstallFlowScene />
+          <Day0InstallFlowScene language={language} />
         </Series.Sequence>
 
-        {/* Scene 5: Hello World Test - 第一个 Agent */}
+        {/* Scene 5: Hello World Test - First Agent Program */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0HelloWorldScene />
+          <Day0HelloWorldScene language={language} />
         </Series.Sequence>
 
-        {/* Scene 6: Value Summary - 价值总结 */}
+        {/* Scene 6: Value Summary - Three Key Values */}
         <Series.Sequence durationInFrames={SCENE_DURATION}>
-          <Day0ValueSummaryScene />
+          <Day0ValueSummaryScene language={language} />
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

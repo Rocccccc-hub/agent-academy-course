@@ -3,13 +3,15 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
+import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 0 Scene 4: Install Flow (15 seconds / 450 frames)
  * Shows simplified installation steps
  */
-export const Day0InstallFlowScene: React.FC = () => {
+export const Day0InstallFlowScene: React.FC<{ language?: Language }> = ({ language = "zh" }) => {
   const frame = useCurrentFrame();
+  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -18,24 +20,24 @@ export const Day0InstallFlowScene: React.FC = () => {
     {
       num: 1,
       icon: "📥",
-      title: "下载安装编辑器",
-      desc: "访问官网，点击下载",
+      title: t.day0Step1Title,
+      desc: t.day0Step1Desc,
       color: colors.customer,
       delay: 50,
     },
     {
       num: 2,
       icon: "🐍",
-      title: "安装 Python",
-      desc: "版本 3.10 或更高",
+      title: t.day0Step2Title,
+      desc: t.day0Step2Desc,
       color: colors.chef,
       delay: 140,
     },
     {
       num: 3,
       icon: "🔑",
-      title: "获取 API 密钥",
-      desc: "注册账号，复制密钥",
+      title: t.day0Step3Title,
+      desc: t.day0Step3Desc,
       color: colors.brain,
       delay: 230,
     },
@@ -70,7 +72,7 @@ export const Day0InstallFlowScene: React.FC = () => {
           opacity: titleOpacity,
         }}
       >
-        快速安装流程
+        {t.day0InstallTitle}
       </div>
 
       {/* Three Steps */}
@@ -191,7 +193,7 @@ export const Day0InstallFlowScene: React.FC = () => {
               textAlign: "center",
             }}
           >
-            安装进度
+            {t.day0InstallProgress}
           </div>
           <div
             style={{
@@ -233,7 +235,7 @@ export const Day0InstallFlowScene: React.FC = () => {
           opacity: messageOpacity,
         }}
       >
-        ⏱️ 只需 30 分钟，一次配置，终身受用
+        {t.day0InstallMessage}
       </div>
     </AbsoluteFill>
   );

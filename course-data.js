@@ -109,7 +109,10 @@ const courseData = [
             en: "Complete Guide to Tool Installation and Configuration"
         },
         duration: "1:30",
-        videoUrl: "./lessons/DAY0-environment-setup.mp4",
+        videoUrl: {
+            zh: "./lessons/DAY0-zh.mp4",
+            en: "./lessons/DAY0-en.mp4"
+        },
         icon: "⚙️",
         chapters: [
             {

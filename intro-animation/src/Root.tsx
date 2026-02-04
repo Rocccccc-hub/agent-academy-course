@@ -35,6 +35,20 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+        defaultProps={{
+          language: "zh" as const,
+        }}
+      />
+      <Composition
+        id="Day0EnvironmentSetupEN"
+        component={Day0EnvironmentSetup}
+        durationInFrames={2700}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          language: "en" as const,
+        }}
       />
       <Composition
         id="Day1AgentArchitecture"
