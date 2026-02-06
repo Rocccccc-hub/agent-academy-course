@@ -9,15 +9,8 @@ import { Day2Principle3Scene } from "./scenes/day2/Day2Principle3Scene";
 import { Day2Principle4Scene } from "./scenes/day2/Day2Principle4Scene";
 import { Day2TemplateScene } from "./scenes/day2/Day2TemplateScene";
 import { Day2SummaryScene } from "./scenes/day2/Day2SummaryScene";
-import { Language } from "./utils/texts";
 
-export interface Day2PromptEngineeringProps {
-  language?: Language;
-}
-
-// Use system fonts for better performance and to avoid Google Fonts timeout
-const fontFamily =
-  'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif';
+const fontFamily = 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif';
 
 // Scene durations (in frames at 30fps)
 const TITLE_DURATION = 120; // 4 seconds
@@ -42,55 +35,53 @@ const SUMMARY_DURATION = 120; // 4 seconds
  * 8. Template Structure (12s)
  * 9. Summary (4s)
  */
-export const Day2PromptEngineering: React.FC<Day2PromptEngineeringProps> = ({
-  language = "zh",
-}) => {
+export const Day2PromptEngineering: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#0d1117", fontFamily }}>
       <Series>
         {/* Scene 1: Title */}
         <Series.Sequence durationInFrames={TITLE_DURATION}>
-          <Day2TitleScene language={language} />
+          <Day2TitleScene />
         </Series.Sequence>
 
         {/* Scene 2: What is Prompt */}
         <Series.Sequence durationInFrames={WHAT_IS_DURATION}>
-          <Day2WhatIsPromptScene language={language} />
+          <Day2WhatIsPromptScene />
         </Series.Sequence>
 
         {/* Scene 3: Bad vs Good */}
         <Series.Sequence durationInFrames={BAD_VS_GOOD_DURATION}>
-          <Day2BadVsGoodScene language={language} />
+          <Day2BadVsGoodScene />
         </Series.Sequence>
 
         {/* Scene 4: Principle 1 */}
         <Series.Sequence durationInFrames={PRINCIPLE_DURATION}>
-          <Day2Principle1Scene language={language} />
+          <Day2Principle1Scene />
         </Series.Sequence>
 
         {/* Scene 5: Principle 2 */}
         <Series.Sequence durationInFrames={PRINCIPLE_DURATION}>
-          <Day2Principle2Scene language={language} />
+          <Day2Principle2Scene />
         </Series.Sequence>
 
         {/* Scene 6: Principle 3 */}
         <Series.Sequence durationInFrames={PRINCIPLE_DURATION}>
-          <Day2Principle3Scene language={language} />
+          <Day2Principle3Scene />
         </Series.Sequence>
 
         {/* Scene 7: Principle 4 */}
         <Series.Sequence durationInFrames={PRINCIPLE_DURATION}>
-          <Day2Principle4Scene language={language} />
+          <Day2Principle4Scene />
         </Series.Sequence>
 
         {/* Scene 8: Template Structure */}
         <Series.Sequence durationInFrames={TEMPLATE_DURATION}>
-          <Day2TemplateScene language={language} />
+          <Day2TemplateScene />
         </Series.Sequence>
 
         {/* Scene 9: Summary */}
         <Series.Sequence durationInFrames={SUMMARY_DURATION}>
-          <Day2SummaryScene language={language} />
+          <Day2SummaryScene />
         </Series.Sequence>
       </Series>
     </AbsoluteFill>

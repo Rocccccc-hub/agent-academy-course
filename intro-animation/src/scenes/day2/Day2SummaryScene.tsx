@@ -3,17 +3,13 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale, pulse } from "../../utils/animations";
-import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 2 Scene 9: Summary (4 seconds / 120 frames)
  * Summarize Prompt Engineering key points
  */
-export const Day2SummaryScene: React.FC<{ language?: Language }> = ({
-  language = "zh",
-}) => {
+export const Day2SummaryScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -24,10 +20,10 @@ export const Day2SummaryScene: React.FC<{ language?: Language }> = ({
 
   // Four points appear in sequence
   const points = [
-    { text: t.day2SummaryPoint1, delay: 30, color: colors.customer },
-    { text: t.day2SummaryPoint2, delay: 45, color: colors.brain },
-    { text: t.day2SummaryPoint3, delay: 60, color: colors.recipe },
-    { text: t.day2SummaryPoint4, delay: 75, color: colors.memory },
+    { text: "📝 清晰明确的指令", delay: 30, color: colors.customer },
+    { text: "🎯 充足的上下文", delay: 45, color: colors.brain },
+    { text: "📐 结构化输出", delay: 60, color: colors.recipe },
+    { text: "📖 示例引导", delay: 75, color: colors.memory },
   ];
 
   // Bottom message
@@ -52,7 +48,7 @@ export const Day2SummaryScene: React.FC<{ language?: Language }> = ({
           opacity: titleOpacity,
         }}
       >
-        {t.day2SummaryTitle}
+        Prompt 工程总结
       </div>
 
       {/* Central Icon */}
@@ -140,7 +136,7 @@ export const Day2SummaryScene: React.FC<{ language?: Language }> = ({
           width: "100%",
         }}
       >
-        🎓 {t.day2SummaryMessage}
+        🎓 掌握 Prompt 工程，让 Agent 更懂你的需求
       </div>
     </AbsoluteFill>
   );

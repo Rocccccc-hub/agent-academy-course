@@ -1,9 +1,9 @@
 // Typography constants for consistent text styling
 
 export const typography = {
-  // Font family (loaded from @remotion/google-fonts/NotoSansSC)
-  // Noto Sans SC provides excellent Chinese character support
-  fontFamily: '"Noto Sans SC", sans-serif',
+  // Font family: Use system fonts for better performance
+  // PingFang SC (macOS/iOS), Microsoft YaHei (Windows), fallback to system defaults
+  fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif',
 
   // Font sizes
   title: 64,

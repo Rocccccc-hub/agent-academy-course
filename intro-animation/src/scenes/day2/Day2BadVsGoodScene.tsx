@@ -3,17 +3,13 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
-import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 2 Scene 3: Bad vs Good Prompt (12 seconds / 360 frames)
  * Compare bad and good prompts side by side
  */
-export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
-  language = "zh",
-}) => {
+export const Day2BadVsGoodScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -51,7 +47,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
           width: "100%",
         }}
       >
-        {t.day2CompareTitle}
+        差劲的 Prompt vs 优秀的 Prompt
       </div>
 
       {/* VS Divider */}
@@ -103,7 +99,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
             textAlign: "center",
           }}
         >
-          {t.day2BadLabel}
+          ❌ 模糊不清
         </div>
 
         {/* Bad Prompt */}
@@ -125,7 +121,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
               textAlign: "center",
             }}
           >
-            💬 {t.day2BadPrompt}
+            💬 查天气
           </div>
         </div>
 
@@ -148,7 +144,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
               whiteSpace: "pre-line",
             }}
           >
-            {t.day2BadResult}
+            ❌ 哪个城市？什么时间？
           </div>
         </div>
       </div>
@@ -173,7 +169,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
             textAlign: "center",
           }}
         >
-          {t.day2GoodLabel}
+          ✅ 清晰明确
         </div>
 
         {/* Good Prompt */}
@@ -197,7 +193,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
               lineHeight: 1.6,
             }}
           >
-            💬 {t.day2GoodPrompt}
+            💬 请查询北京市明天的天气预报，{"\n"}包括温度、降水概率和空气质量
           </div>
         </div>
 
@@ -220,7 +216,7 @@ export const Day2BadVsGoodScene: React.FC<{ language?: Language }> = ({
               whiteSpace: "pre-line",
             }}
           >
-            {t.day2GoodResult}
+            ✅ 明天北京：15-22°C{"\n"}降水概率20%，空气质量良好
           </div>
         </div>
       </div>

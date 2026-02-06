@@ -3,17 +3,13 @@ import { AbsoluteFill, useCurrentFrame, interpolate, Easing } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
-import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 2 Scene 2: What is Prompt (8 seconds / 240 frames)
  * Explain the concept of Prompt
  */
-export const Day2WhatIsPromptScene: React.FC<{ language?: Language }> = ({
-  language = "zh",
-}) => {
+export const Day2WhatIsPromptScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -51,7 +47,7 @@ export const Day2WhatIsPromptScene: React.FC<{ language?: Language }> = ({
           opacity: titleOpacity,
         }}
       >
-        {t.day2WhatTitle}
+        什么是 Prompt？
       </div>
 
       {/* Description */}
@@ -67,7 +63,7 @@ export const Day2WhatIsPromptScene: React.FC<{ language?: Language }> = ({
           lineHeight: 1.5,
         }}
       >
-        {t.day2WhatDesc}
+        Prompt 是与 AI 对话的输入指令{"\n"}决定了 Agent 的理解和输出质量
       </div>
 
       {/* Example Prompt Box */}
@@ -91,7 +87,7 @@ export const Day2WhatIsPromptScene: React.FC<{ language?: Language }> = ({
             textAlign: "center",
           }}
         >
-          💬 {t.day2WhatExample}
+          💬 你好，请帮我查询天气
         </div>
       </div>
 

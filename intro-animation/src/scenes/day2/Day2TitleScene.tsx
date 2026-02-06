@@ -64,7 +64,7 @@ export const Day2TitleScene: React.FC<{ language?: Language }> = ({
           border: `2px solid ${colors.customer}`,
         }}
       >
-        {t.day2Label}
+        DAY 2 - Prompt 工程
       </div>
 
       {/* Main Title */}
@@ -78,7 +78,7 @@ export const Day2TitleScene: React.FC<{ language?: Language }> = ({
           opacity: titleOpacity,
         }}
       >
-        {t.day2Title}
+        Prompt 工程与优化
       </div>
 
       {/* Subtitle */}
@@ -91,7 +91,7 @@ export const Day2TitleScene: React.FC<{ language?: Language }> = ({
           opacity: subtitleOpacity,
         }}
       >
-        {t.day2Subtitle}
+        掌握与 Agent 对话的艺术
       </div>
     </AbsoluteFill>
   );

@@ -3,17 +3,13 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { colors } from "../../utils/colors";
 import { typography } from "../../utils/typography";
 import { fadeIn, bounceScale } from "../../utils/animations";
-import { texts, Language } from "../../utils/texts";
 
 /**
  * Day 2 Scene 8: Prompt Template Structure (12 seconds / 360 frames)
  * Show the complete Agent Prompt template
  */
-export const Day2TemplateScene: React.FC<{ language?: Language }> = ({
-  language = "zh",
-}) => {
+export const Day2TemplateScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = texts[language];
 
   const titleOpacity = fadeIn(frame, 0);
 
@@ -53,7 +49,7 @@ export const Day2TemplateScene: React.FC<{ language?: Language }> = ({
           textAlign: "center",
         }}
       >
-        {t.day2TemplateTitle}
+        Agent Prompt 模板结构
       </div>
 
       {/* Formula Components */}
@@ -171,7 +167,7 @@ export const Day2TemplateScene: React.FC<{ language?: Language }> = ({
           opacity: exampleLabelOpacity,
         }}
       >
-        {t.day2TemplateLabel}
+        完整 Prompt 示例
       </div>
 
       {/* Example Template Box */}
@@ -198,7 +194,7 @@ export const Day2TemplateScene: React.FC<{ language?: Language }> = ({
             fontFamily: "monospace",
           }}
         >
-          {t.day2TemplateExample}
+          你是一个天气助手 Agent。{"\n"}任务：查询指定城市的天气。{"\n"}工具：get_weather(city, date){"\n"}输出：{"{city, date, temperature, desc}"}{"\n"}约束：日期不超过7天
         </div>
       </div>
 
