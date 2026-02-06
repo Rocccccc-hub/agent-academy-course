@@ -62,7 +62,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Day2PromptEngineering"
         component={Day2PromptEngineering}
-        durationInFrames={1800}
+        durationInFrames={2400}
         fps={30}
         width={1920}
         height={1080}
@@ -73,7 +73,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="Day2PromptEngineeringEN"
         component={Day2PromptEngineering}
-        durationInFrames={1800}
+        durationInFrames={2400}
         fps={30}
         width={1920}
         height={1080}

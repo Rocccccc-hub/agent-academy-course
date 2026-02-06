@@ -22,7 +22,7 @@ const SUMMARY_DURATION = 120; // 4 seconds
 
 /**
  * Day 2: Prompt Engineering & Optimization
- * Total: 2 minutes (1800 frames)
+ * Total: 80 seconds (2400 frames)
  *
  * Scene breakdown:
  * 1. Title (4s)
