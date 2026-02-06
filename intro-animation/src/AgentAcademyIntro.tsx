@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, Series } from "remotion";
-import { loadFont } from "@remotion/google-fonts/NotoSansSC";
 import { RestaurantTitleScene } from "./scenes/RestaurantTitleScene";
 import { RestaurantIntroScene } from "./scenes/RestaurantIntroScene";
 import { CustomerOrderScene } from "./scenes/CustomerOrderScene";
@@ -12,8 +11,7 @@ import { RestaurantSummaryScene } from "./scenes/RestaurantSummaryScene";
 import { sceneDurations } from "./utils/timing";
 import { Language } from "./utils/texts";
 
-// Load Noto Sans SC (Source Han Sans) for consistent Chinese font rendering
-const { fontFamily } = loadFont();
+const fontFamily = 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif';
 
 export interface AgentAcademyIntroProps {
   language?: Language;

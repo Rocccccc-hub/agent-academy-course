@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, Series } from "remotion";
-import { loadFont } from "@remotion/google-fonts/NotoSansSC";
 import { Day0TitleScene } from "./scenes/day0/Day0TitleScene";
 import { Day0WhyNeedScene } from "./scenes/day0/Day0WhyNeedScene";
 import { Day0ThreeToolsScene } from "./scenes/day0/Day0ThreeToolsScene";
@@ -9,8 +8,7 @@ import { Day0HelloWorldScene } from "./scenes/day0/Day0HelloWorldScene";
 import { Day0ValueSummaryScene } from "./scenes/day0/Day0ValueSummaryScene";
 import { Language } from "./utils/texts";
 
-// Load Noto Sans SC for consistent Chinese font rendering
-const { fontFamily } = loadFont();
+const fontFamily = 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif';
 
 // Each scene is 15 seconds (450 frames at 30fps)
 const SCENE_DURATION = 450;
